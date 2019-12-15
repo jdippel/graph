@@ -20,7 +20,7 @@
 
 package chess383.graph.board.standard;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,8 +54,7 @@ public class ICoordinate_GetLineBundles_DyadicCall_Undirected_StandardBoard exte
     @ParameterizedTest( name = "given a standard board from location {0} there will be lines {1} to walk along" )
     @MethodSource("stringAndListProvider")
     public void testWithMultiArgMethodSource( String origin, List<String> expectedResultList ) {
-        
-    	assertTrue( compareLists( BOARD.getLineBundles( origin, DIRECTION ), expectedResultList ) );
+    	assertThat( compareLists( BOARD.getLineBundles( origin, DIRECTION ), expectedResultList ) ).as( describeOnError( origin ) ).isTrue();
     }
 
     public static Stream<Arguments> stringAndListProvider() {

@@ -20,7 +20,7 @@
 
 package chess383.graph.adjacency;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,25 +37,27 @@ import org.junit.jupiter.api.Test;
 @DisplayName("the public method String toString() for enumeration AdjacencyEnum is tested")
 public class AdjacencyEnum_ToString { 
 
+	final String DESCRIPTION = "toString() result should match definition";
+	
     @Test
     @DisplayName("ToString(): result should be equal to given definition of enumeration value for USPECIFIED")
     public void ToString_shouldBeEqual_ForGivenDefinition_USPECIFIED( ) {
 
-    	assertEquals( "unspecified adjacency", AdjacencyEnum.UNSPECIFIED.toString() );
+    	assertThat( AdjacencyEnum.UNSPECIFIED.toString() ).as( DESCRIPTION ).isEqualTo( "unspecified adjacency" );
     }
     
     @Test
     @DisplayName("ToString(): result should be equal to given definition of enumeration value for BY_EDGE")
     public void ToString_shouldBeEqual_ForGivenDefinition_BY_EDGE( ) {
 
-    	assertEquals( "adjacency by edge", AdjacencyEnum.BY_EDGE.toString() );
+    	assertThat( AdjacencyEnum.BY_EDGE.toString() ).as( DESCRIPTION ).isEqualTo( "adjacency by edge" );
     }
     
     @Test
     @DisplayName("ToString(): result should be equal to given definition of enumeration value for BY_POINT")
     public void ToString_shouldBeEqual_ForGivenDefinition_BY_POINT( ) {
 
-    	assertEquals( "adjacency by point", AdjacencyEnum.BY_POINT.toString() );
+    	assertThat( AdjacencyEnum.BY_POINT.toString() ).as( DESCRIPTION ).isEqualTo( "adjacency by point" );
     }
 }
 

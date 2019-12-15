@@ -108,6 +108,6 @@ public class Direction implements Serializable {
         return( result );
     }
 
-    @Override public int hashCode( ) { return( getStart( ).toString( ).hashCode( ) + 7 * getEnd( ).toString( ).hashCode( ) ); }
+    @Override public int hashCode( ) { return( toString( ).hashCode( ) ); }
 }
 

@@ -20,8 +20,8 @@
 
 package chess383.graph.direction;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +48,7 @@ public class Direction_HashCode {
         final int hashCode = direction.hashCode( );
         final String message = "identical instances are compared";
 
-        assertEquals( hashCode, UNIDIRECTIONAL.hashCode( ), message );
+        assertThat( hashCode ).as( message ).isEqualTo( UNIDIRECTIONAL.hashCode( ) );
     }
 
     @Test
@@ -59,7 +59,7 @@ public class Direction_HashCode {
         final int hashCode = direction.hashCode( );
         final String message = "meaningfully equivalent instances are compared";
 
-        assertEquals( hashCode, Direction.createBidirectionalDirection( ).hashCode( ), message );
+        assertThat( hashCode ).as( message ).isEqualTo( Direction.createBidirectionalDirection( ).hashCode( ) );
     }
 
     @Test
@@ -70,6 +70,6 @@ public class Direction_HashCode {
         final int hashCode = direction.hashCode( );
         final String message = "different instances are compared";
 
-        assertNotSame( hashCode, Direction.createBidirectionalDirection( ).hashCode( ), message );
+        assertThat( hashCode ).as( message ).isNotEqualTo( Direction.createBidirectionalDirection( ).hashCode( ) );
     }
 }

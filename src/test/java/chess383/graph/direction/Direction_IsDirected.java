@@ -21,8 +21,7 @@
 package chess383.graph.direction;
 
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,7 +51,7 @@ public class Direction_IsDirected {
 
         final Direction direction = UNIDIRECTIONAL;
 
-        assertTrue( direction.isDirected( ), ERROR_MESSAGE );
+        assertThat( direction.isDirected( ) ).as( ERROR_MESSAGE ).isTrue();
     }
     
     @Test
@@ -62,6 +61,6 @@ public class Direction_IsDirected {
 
         final Direction direction = BIDIRECTIONAL;
 
-        assertFalse( direction.isDirected( ), ERROR_MESSAGE );
+        assertThat( direction.isDirected( ) ).as( ERROR_MESSAGE ).isFalse();
     }
 }

@@ -20,8 +20,7 @@
 
 package chess383.graph.direction;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,10 +37,6 @@ import chess383.ColorEnum;
 @DisplayName("the public method boolean equals() form class Direction is tested")
 public class Direction_Equals {
 
-    /**
-     * the public method boolean equals( ) is tested.
-     */
-
     final Direction BIDIRECTIONAL = Direction.createBidirectionalDirection( );
     final Direction UNIDIRECTIONAL = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
     
@@ -52,7 +47,7 @@ public class Direction_Equals {
         final Direction direction = BIDIRECTIONAL;
         final String message = "identical instances are compared";
 
-        assertTrue( direction.equals( direction ), message );
+        assertThat( direction.equals( direction ) ).as( message ).isTrue();
     }
     
     @Test
@@ -62,7 +57,7 @@ public class Direction_Equals {
         final Direction direction = UNIDIRECTIONAL;
         final String message = "identical instances are compared";
 
-        assertTrue( direction.equals( direction ), message );
+        assertThat( direction.equals( direction ) ).as( message ).isTrue();
     }
 
     @Test
@@ -72,7 +67,7 @@ public class Direction_Equals {
         final Direction direction = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
         final String message = "meaningfully equivalent instances are compared";
 
-        assertTrue( UNIDIRECTIONAL.equals( direction ), message );
+        assertThat( UNIDIRECTIONAL.equals( direction ) ).as( message ).isTrue();
     }
     
     @Test
@@ -82,7 +77,7 @@ public class Direction_Equals {
         final Direction direction = Direction.createBidirectionalDirection( );
         final String message = "meaningfully equivalent instances are compared";
 
-        assertTrue( direction.equals( BIDIRECTIONAL ), message );
+        assertThat( BIDIRECTIONAL.equals( direction ) ).as( message ).isTrue();
     }
 
     @Test
@@ -91,6 +86,6 @@ public class Direction_Equals {
 
         final String message = "different instances are compared";
 
-        assertFalse( UNIDIRECTIONAL.equals( BIDIRECTIONAL ), message );
+        assertThat( BIDIRECTIONAL.equals( UNIDIRECTIONAL ) ).as( message ).isFalse();
     }
 }

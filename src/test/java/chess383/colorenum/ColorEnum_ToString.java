@@ -20,8 +20,7 @@
 
 package chess383.colorenum;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,7 +33,7 @@ import chess383.ColorEnum;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   October 2019
+ * @version   December 2019
  *
  */
 @DisplayName("the public methods String toString( ) for enum ColorEnum is tested")
@@ -44,112 +43,112 @@ public class ColorEnum_ToString {
     @DisplayName("toString(): result should be equal to defined description for enum WHITE")
     public void toString_shouldBeEqual_ForEnum_WHITE_ToTheDefinedDescription( ) {
 
-    	assertEquals( "white", ColorEnum.WHITE.toString() );
+    	assertThat( ColorEnum.WHITE.toString() ).as( "should be white" ).isEqualTo( "white" );
     }
     
     @Test
     @DisplayName("toString(): result should be equal to defined description for enum BLACK")
     public void toString_shouldBeEqual_ForEnum_BLACK_ToTheDefinedDescription( ) {
 
-    	assertEquals( "black", ColorEnum.BLACK.toString() );
+    	assertThat( ColorEnum.BLACK.toString() ).as( "should be black" ).isEqualTo( "black" );
     }
 
     @Test
     @DisplayName("toString(): result should be equal to defined description for enum RED")
     public void verifyTheCorrectReturnForTheToStringMethod( ) {
 
-    	assertEquals( "red", ColorEnum.RED.toString() );
+    	assertThat( ColorEnum.RED.toString() ).as( "should be red" ).isEqualTo( "red" );
     }
     
     @Test
     @DisplayName("toString(): result should be equal to defined description for enum NONE")
     public void toString_shouldBeEqual_ForEnum_NONE_ToTheDefinedDescription( ) {
 
-    	assertEquals( "no color", ColorEnum.NONE.toString() );
+    	assertThat( ColorEnum.NONE.toString() ).as( "should be no color" ).isEqualTo( "no color" );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for WHITE and BLACK")
     public void toString_shouldBeDifferent_ForEnum_WHITE_ToDefinedDescriptionForEnum_BLACK( ) {
 
-    	assertNotEquals( ColorEnum.WHITE.toString(), ColorEnum.BLACK.toString() );
+    	assertThat( ColorEnum.WHITE.toString() ).as( "toString() for white and black should be different" ).isNotEqualTo( ColorEnum.BLACK.toString() );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for WHITE and RED")
     public void toString_shouldBeDifferent_ForEnum_WHITE_ToDefinedDescriptionForEnum_RED( ) {
 
-    	assertNotEquals( ColorEnum.WHITE.toString(), ColorEnum.RED.toString() );
+    	assertThat( ColorEnum.WHITE.toString() ).as( "toString() for white and red should be different" ).isNotEqualTo( ColorEnum.RED.toString() );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for WHITE and NONE")
     public void toString_shouldBeDifferent_ForEnum_WHITE_ToDefinedDescriptionForEnum_NONE( ) {
 
-    	assertNotEquals( ColorEnum.WHITE.toString(), ColorEnum.NONE.toString() );
+    	assertThat( ColorEnum.WHITE.toString() ).as( "toString() for white and NONE should be different" ).isNotEqualTo( ColorEnum.NONE.toString() );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for BLACK and WHITE")
     public void toString_shouldBeDifferent_ForEnum_BLACK_ToDefinedDescriptionForEnum_WHITE( ) {
 
-    	assertNotEquals( ColorEnum.BLACK.toString(), ColorEnum.WHITE.toString() );
+    	assertThat( ColorEnum.BLACK.toString() ).as( "toString() for black and white should be different" ).isNotEqualTo( ColorEnum.WHITE.toString() );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for BLACK and RED")
     public void toString_shouldBeDifferent_ForEnum_BLACK_ToDefinedDescriptionForEnum_RED( ) {
 
-    	assertNotEquals( ColorEnum.BLACK.toString(), ColorEnum.RED.toString() );
+    	assertThat( ColorEnum.BLACK.toString() ).as( "toString() for black and red should be different" ).isNotEqualTo( ColorEnum.RED.toString() );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for BLACK and NONE")
     public void toString_shouldBeDifferent_ForEnum_BLACK_ToDefinedDescriptionForEnum_NONE( ) {
 
-    	assertNotEquals( ColorEnum.BLACK.toString(), ColorEnum.NONE.toString() );
+    	assertThat( ColorEnum.BLACK.toString() ).as( "toString() for black and NONE should be different" ).isNotEqualTo( ColorEnum.NONE.toString() );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for RED and WHITE")
     public void toString_shouldBeDifferent_ForEnum_RED_ToDefinedDescriptionForEnum_WHITE( ) {
 
-    	assertNotEquals( ColorEnum.RED.toString(), ColorEnum.WHITE.toString() );
+    	assertThat( ColorEnum.RED.toString() ).as( "toString() for red and white should be different" ).isNotEqualTo( ColorEnum.WHITE.toString() );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for RED and BLACK")
     public void toString_shouldBeDifferent_ForEnum_RED_ToDefinedDescriptionForEnum_BLACK( ) {
 
-    	assertNotEquals( ColorEnum.RED.toString(), ColorEnum.BLACK.toString() );
+    	assertThat( ColorEnum.RED.toString() ).as( "toString() for red and black should be different" ).isNotEqualTo( ColorEnum.BLACK.toString() );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for RED and NONE")
     public void toString_shouldBeDifferent_ForEnum_RED_ToDefinedDescriptionForEnum_NONE( ) {
 
-    	assertNotEquals( ColorEnum.RED.toString(), ColorEnum.NONE.toString() );
+    	assertThat( ColorEnum.RED.toString() ).as( "toString() for red and NONE should be different" ).isNotEqualTo( ColorEnum.NONE.toString() );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for NONE and WHITE")
     public void toString_shouldBeDifferent_ForEnum_NONE_ToDefinedDescriptionForEnum_WHITE( ) {
 
-    	assertNotEquals( ColorEnum.NONE.toString(), ColorEnum.WHITE.toString() );
+    	assertThat( ColorEnum.NONE.toString() ).as( "toString() for NONE and white should be different" ).isNotEqualTo( ColorEnum.WHITE.toString() );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for NONE and BLACK")
     public void toString_shouldBeDifferent_ForEnum_NONE_ToDefinedDescriptionForEnum_BLACK( ) {
 
-    	assertNotEquals( ColorEnum.NONE.toString(), ColorEnum.BLACK.toString() );
+    	assertThat( ColorEnum.NONE.toString() ).as( "toString() for NONE and black should be different" ).isNotEqualTo( ColorEnum.BLACK.toString() );
     }
     
     @Test
     @DisplayName("toString(): when comparing two different colors with the toString method then both results should be different for NONE and RED")
     public void toString_shouldBeDifferent_ForEnum_NONE_ToDefinedDescriptionForEnum_RED( ) {
 
-    	assertNotEquals( ColorEnum.NONE.toString(), ColorEnum.RED.toString() );
+    	assertThat( ColorEnum.NONE.toString() ).as( "toString() for NONE and red should be different" ).isNotEqualTo( ColorEnum.RED.toString() );
     }
 }
 

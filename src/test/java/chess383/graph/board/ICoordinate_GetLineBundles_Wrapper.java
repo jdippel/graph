@@ -42,6 +42,9 @@ public class ICoordinate_GetLineBundles_Wrapper {
     private static final ArrayList<String> ARRAY_LIST = new ArrayList<String>();
     protected final static List<String>  EMPTY_STRING_LIST = ARRAY_LIST;
     
+    protected String describeOnError( String origin ) {
+        return String.format( "bundled lines do not match for %s", origin );
+    }
     
     protected boolean testOfArguments( ICoordinate board, String origin, Direction direction, AdjacencyEnum adjacency, List<String> expectedResultList) {
       
@@ -59,14 +62,14 @@ public class ICoordinate_GetLineBundles_Wrapper {
         
         boolean result = true;
         for( String expectedString : expectedList ) {
-        	result = false;
-        	for ( String receivedString : LineBundleMigration.flatten( receivedSet ) ) {
-        		if ( receivedString.startsWith( expectedString ) ) {
-        			result = true;
-        			break;
-        		}
-        	}
-        	if ( result == false ) break;
+            result = false;
+            for ( String receivedString : LineBundleMigration.flatten( receivedSet ) ) {
+                if ( receivedString.startsWith( expectedString ) ) {
+                    result = true;
+                    break;
+                }
+            }
+            if ( result == false ) break;
         }
         return result;
     }

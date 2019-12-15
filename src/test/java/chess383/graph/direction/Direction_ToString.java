@@ -20,7 +20,8 @@
 
 package chess383.graph.direction;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,7 +52,7 @@ public class Direction_ToString {
         final Direction direction = UNIDIRECTIONAL;
         final String description = "directed from " + direction.getStart( ).toString( ) + " to " + direction.getEnd( ).toString( );
 
-        assertEquals( description, direction.toString( ), ERROR_MESSAGE );
+        assertThat( direction.toString( ) ).as( ERROR_MESSAGE ).isEqualTo( description );
     }
     
     @Test
@@ -61,6 +62,6 @@ public class Direction_ToString {
         final Direction direction = BIDIRECTIONAL;
         final String description = "not directed";
 
-        assertEquals( description, direction.toString( ), ERROR_MESSAGE );
+        assertThat( direction.toString( ) ).as( ERROR_MESSAGE ).isEqualTo( description );
     }
 }

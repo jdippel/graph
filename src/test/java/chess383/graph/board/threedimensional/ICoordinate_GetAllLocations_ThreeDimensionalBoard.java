@@ -20,7 +20,7 @@
 
 package chess383.graph.board.threedimensional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
@@ -49,9 +49,9 @@ public class ICoordinate_GetAllLocations_ThreeDimensionalBoard {
     private void compareSetOfLocations( String expected, Set<String> squares ) {
         
         String[] tokens = expected.split( "\\s+" );
-        assertEquals( tokens.length, squares.size( ), "Sets must be of same size:" );
+        assertThat( squares.size( ) ).as ( "Sets must be of same size:" ).isEqualTo( tokens.length );
         for( String square : tokens ) {
-            assertEquals( true, squares.contains( square ) );
+            assertThat( squares.contains( square ) ).as( "each element must be included").isTrue();
         }
     }
     

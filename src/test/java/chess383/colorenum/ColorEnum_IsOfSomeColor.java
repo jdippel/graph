@@ -20,8 +20,7 @@
 
 package chess383.colorenum;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,7 +33,7 @@ import chess383.ColorEnum;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   October 2019
+ * @version   December 2019
  *
  */
 @DisplayName("the public accessor methods boolean isOf...( ) for enum ColorEnum is tested")
@@ -44,84 +43,84 @@ public class ColorEnum_IsOfSomeColor {
     @DisplayName("isOfWhiteColor(): result should be true for given enum value WHITE")
     public void isOfWhiteColor_shouldBeTrue_ForEnum_WHITE( ) {
 
-    	assertTrue( ColorEnum.WHITE.isOfWhiteColor( ) );
+    	assertThat( ColorEnum.WHITE.isOfWhiteColor( ) ).as( "true for given enum value WHITE" ).isTrue();
     }
     
     @Test
     @DisplayName("isOfBlackColor(): result should be true for given enum value BLACK")
     public void isOfBlackColor_shouldBeTrue_ForEnum_BLACK( ) {
 
-    	assertTrue( ColorEnum.BLACK.isOfBlackColor( ) );
+    	assertThat( ColorEnum.BLACK.isOfBlackColor( ) ).as( "true for given enum value BLACK" ).isTrue();
     }
     
     @Test
     @DisplayName("isOfRedColor(): result should be true for given enum value RED")
     public void isOfRedColor_shouldBeTrue_ForEnum_RED( ) {
 
-    	assertTrue( ColorEnum.RED.isOfRedColor( ) );
+    	assertThat( ColorEnum.RED.isOfRedColor( ) ).as( "true for given enum value RED" ).isTrue();
     }
     
     @Test
     @DisplayName("isOfWhiteColor(): result should be false for given enum value NONE")
     public void isOfWhiteColor_shouldBeFalse_ForEnum_NONE( ) {
 
-    	assertFalse( ColorEnum.NONE.isOfWhiteColor( ) );
+    	assertThat( ColorEnum.NONE.isOfWhiteColor( ) ).as( "false for given enum value NONE" ).isFalse();
     }
     
     @Test
     @DisplayName("isOfWhiteColor(): result should be false for given enum value BLACK")
     public void isOfWhiteColor_shouldBeFalse_ForEnum_BLACK( ) {
 
-    	assertFalse( ColorEnum.BLACK.isOfWhiteColor( ) );
+    	assertThat( ColorEnum.BLACK.isOfWhiteColor( ) ).as( "false for given enum value BLACK" ).isFalse();
     }
     
     @Test
     @DisplayName("isOfWhiteColor(): result should be false for given enum value RED")
     public void isOfWhiteColor_shouldBeFalse_ForEnum_RED( ) {
 
-    	assertFalse( ColorEnum.RED.isOfWhiteColor( ) );
+    	assertThat( ColorEnum.RED.isOfWhiteColor( ) ).as( "false for given enum value RED" ).isFalse();
     }
     
     @Test
     @DisplayName("isOfBlackColor(): result should be false for given enum value NONE")
     public void isOfBlackColor_shouldBeFalse_ForEnum_NONE( ) {
 
-    	assertFalse( ColorEnum.NONE.isOfBlackColor( ) );
+    	assertThat( ColorEnum.NONE.isOfBlackColor( ) ).as( "false for given enum value NONE" ).isFalse();
     }
     
     @Test
     @DisplayName("isOfBlackColor(): result should be false for given enum value WHITE")
     public void isOfBlackColor_shouldBeFalse_ForEnum_WHITE( ) {
 
-    	assertFalse( ColorEnum.WHITE.isOfBlackColor( ) );
+    	assertThat( ColorEnum.WHITE.isOfBlackColor( ) ).as( "false for given enum value WHITE" ).isFalse();
     }
     
     @Test
     @DisplayName("isOfBlackColor(): result should be false for given enum value RED")
     public void isOfBlackColor_shouldBeFalse_ForEnum_RED( ) {
 
-    	assertFalse( ColorEnum.RED.isOfBlackColor( ) );
+    	assertThat( ColorEnum.RED.isOfBlackColor( ) ).as( "false for given enum value RED" ).isFalse();
     }
     
     @Test
     @DisplayName("isOfRedColor(): result should be false for given enum value NONE")
     public void isOfRedColor_shouldBeFalse_ForEnum_NONE( ) {
 
-    	assertFalse( ColorEnum.NONE.isOfRedColor( ) );
+    	assertThat( ColorEnum.NONE.isOfRedColor( ) ).as( "false for given enum value NONE" ).isFalse();
     }
     
     @Test
     @DisplayName("isOfRedColor(): result should be false for given enum value WHITE")
     public void isOfRedColor_shouldBeFalse_ForEnum_WHITE( ) {
 
-    	assertFalse( ColorEnum.WHITE.isOfRedColor( ) );
+    	assertThat( ColorEnum.WHITE.isOfRedColor( ) ).as( "false for given enum value WHITE" ).isFalse();
     }
     
     @Test
     @DisplayName("isOfRedColor(): result should be false for given enum value BLACK")
     public void isOfRedColor_shouldBeFalse_ForEnum_BLACK( ) {
 
-    	assertFalse( ColorEnum.BLACK.isOfRedColor( ) );
+    	assertThat( ColorEnum.BLACK.isOfRedColor( ) ).as( "false for given enum value BLACK" ).isFalse();
     }
 }
 

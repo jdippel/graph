@@ -24,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import chess383.ColorEnum;
 import chess383.graph.adjacency.AdjacencyEnum;
 import chess383.graph.direction.Direction;
 
@@ -62,6 +63,15 @@ public class LineOfLocations_HashCode {
         assertThat( LineOfLocations.createLine( ADJACENCY, DIRECTION, LOCATIONS ).hashCode( ) )
                   .as( "hash code for meaningfully equivalent instances should match" )
                   .isEqualTo( HASH_CODE );
+    }
+    
+    @Test
+    @DisplayName("hashCode(): should differ for unidirectional instances of LineOfLocations when locations are reversed")
+    public void unidirectionalInstanceReversedShouldDiffer( ) {
+
+        assertThat( LineOfLocations.createLine( ADJACENCY, Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK ), LOCATIONS ).hashCode( ) )
+                  .as( "hash code for meaningfully equivalent instances should match" )
+                  .isNotEqualTo( LineOfLocations.createLine( ADJACENCY, Direction.createUnidirectionalDirection( ColorEnum.BLACK, ColorEnum.WHITE ), LOCATIONS ).hashCode( ) );
     }
 }
 

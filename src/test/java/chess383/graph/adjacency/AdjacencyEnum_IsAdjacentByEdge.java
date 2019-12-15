@@ -20,8 +20,7 @@
 
 package chess383.graph.adjacency;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,21 +42,21 @@ public class AdjacencyEnum_IsAdjacentByEdge {
     @DisplayName("isAdjacentByEdge(): result should be false when adjacency is UNSPECIFIED")
     public void isAdjacentByEdge_shouldBeFalse_WhenAdjacencyIs_UNSPECIFIED( ) {
 
-    	assertFalse( AdjacencyEnum.UNSPECIFIED.isAdjacentByEdge() );
+    	assertThat( AdjacencyEnum.UNSPECIFIED.isAdjacentByEdge() ).as( "false when adjacency is UNSPECIFIED" ).isFalse();
     }
     
     @Test
     @DisplayName("isAdjacentByEdge(): result should be true when adjacency is BY_EDGE")
     public void isAdjacentByEdge_shouldBeTrue_WhenAdjacencyIs_BY_EDGE( ) {
 
-    	assertTrue( AdjacencyEnum.BY_EDGE.isAdjacentByEdge() );
+    	assertThat( AdjacencyEnum.BY_EDGE.isAdjacentByEdge() ).as( "true when adjacency is BY_EDGE" ).isTrue();
     }
     
     @Test
     @DisplayName("isAdjacentByEdge(): result should be false when adjacency is BY_POINT")
     public void isAdjacentByEdge_shouldBeFalse_WhenAdjacencyIs_BY_POINT( ) {
 
-    	assertFalse( AdjacencyEnum.BY_POINT.isAdjacentByEdge() );
+    	assertThat( AdjacencyEnum.BY_POINT.isAdjacentByEdge() ).as( "false when adjacency is BY_POINT" ).isFalse();
     }
 }
 
