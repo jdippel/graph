@@ -2,7 +2,7 @@
  *  LineOfLocations.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2019,2020 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
  *  along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package chess383.graph.coordinate;
+package chess383.graph.line;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -31,38 +31,30 @@ import chess383.graph.direction.Direction;
  * Provides locations on a line.
  *
  * @author    Jörg Dippel
- * @version   July 2019
+ * @version   February 2020
  *
  */
-public class LineOfLocations implements Serializable {
+public abstract class LineOfLocations implements Serializable {
     
     // for interface Serializable
 	private static final long serialVersionUID = 3544070056343946501L;
 	
 	/** ---------  Attributes  -------------------------------- */
 
-    private AdjacencyEnum adjacency;
+//    private AdjacencyEnum adjacency;            // adjacency is defined by polymorphism
     private Direction direction;
     private String locations;
 
     /** ---------  Constructors  ------------------------------ */
 
-    private LineOfLocations( AdjacencyEnum adjacency, Direction direction, String locations ) {
+    protected LineOfLocations( AdjacencyEnum adjacency, Direction direction, String locations ) {
 
-        setAdjacency( adjacency );
+//        setAdjacency( adjacency );            // adjacency is defined by polymorphism
         setDirection( direction );
         setLocations( locations );
     }
 
     /** ---------  Getter and Setter  ------------------------- */
-
-    // adjacency is another relic of the description of a game representation: a two-dimensional board.
-    // names as locations are connected in the plane by edges or corners, or the are not connected.
-    // adjacency is an attribute which describes that connection.
-    // But if there is no longer a plane there will be only an attribute.
-
-    private void setAdjacency( AdjacencyEnum value ) { this.adjacency = value; }
-    public AdjacencyEnum getAdjacency( )             { return( this.adjacency ); }
     
     private void setDirection( Direction value )     { this.direction = value; }
     public Direction getDirection( )                 { return( this.direction ); }
@@ -72,20 +64,16 @@ public class LineOfLocations implements Serializable {
 
     /** ---------  Factory  ----------------------------------- */
     
-    public static LineOfLocations createLine( AdjacencyEnum adjacency, Direction direction, String locations ) {
-
-        LineOfLocations result;
-
-        result = new LineOfLocations( adjacency, direction, normalize( locations, direction.isDirected() ) );
-        
-        return result;
-    }
+    // will be defined by inherited classes
 
     /** ------------------------------------------------------- */
     
+    public abstract boolean matchesAdjacency( AdjacencyEnum adjacency );
+    
+    
     // only let pass strings with at least two tokens separated by white space
     // then pass the list of all remaining tokens each separated with a single space
-    private static String normalize( String value, boolean directed ) {
+    protected static String normalize( String value, boolean directed ) {
 
         if( value == null ) {
             return( "" );
@@ -147,31 +135,7 @@ public class LineOfLocations implements Serializable {
     @Override
     public String toString( ) {
 
-        return( getAdjacency().toString() + " : " + getDirection().toString() + " : " + getLocations() );
+        return( getDirection().toString() + " : " + getLocations() );
     }
-
-    @Override
-    public boolean equals( Object value ) {
-
-        boolean result;
-
-        result = ( value instanceof LineOfLocations ) && 
-        		 isMeaningfullyEquivalent( ( LineOfLocations ) value );
-        
-        return( result );
-    }
-
-    private boolean isMeaningfullyEquivalent( LineOfLocations value ) {
-
-        boolean result;
-        
-        result = getAdjacency().equals( value.getAdjacency() ) 
-        	  && getDirection().equals( value.getDirection() ) 
-              && getLocations().equals( value.getLocations() );
-
-        return( result );
-    }
-
-    @Override public int hashCode( ) { return( toString( ).hashCode( ) ); }
 }
 

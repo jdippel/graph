@@ -18,7 +18,7 @@
  *  along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package chess383.graph.coordinate;
+package chess383.graph.line;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,9 +26,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import chess383.ColorEnum;
-import chess383.graph.adjacency.AdjacencyEnum;
-import chess383.graph.coordinate.LineOfLocations;
 import chess383.graph.direction.Direction;
+import chess383.graph.line.DirectedFilesLine;
+import chess383.graph.line.LineOfLocations;
+import chess383.graph.line.UndirectedRowsLine;
 
 
 /**
@@ -46,11 +47,9 @@ public class LineOfLocations_CreateLine {
     @DisplayName("createLine(): should return LineOfLocations when locations are defined as a rank")
     public void createLine_shouldReturnLineOfLocations_WhenLocationsAreDefinedAsARank( ) {
         
-        AdjacencyEnum ADJACENCY = AdjacencyEnum.BY_EDGE;
-        Direction DIRECTION = Direction.createBidirectionalDirection();
         String passedString = "e4 e5 e6 e7 e8";
 
-        assertThat( LineOfLocations.createLine( ADJACENCY, DIRECTION, passedString ) )
+        assertThat( UndirectedRowsLine.createLine( passedString ) )
                   .as( "should return instance of LineOfLocations" )
                   .isInstanceOf( LineOfLocations.class );
     }
@@ -59,84 +58,75 @@ public class LineOfLocations_CreateLine {
     @DisplayName("createLine(): should return LineOfLocations when locations are defined as a diagonal from black to white")
     public void createLine_shouldReturnLineOfLocations_WhenLocationsAreDefinedAsADiagonalFromBlackToWhite( ) {
         
-        AdjacencyEnum ADJACENCY = AdjacencyEnum.BY_POINT;
         Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.BLACK, ColorEnum.WHITE );
         String passedString = "g7 f6 e5 d4";
         String expectedString = "g7 f6 e5 d4";
 
-        assertThat( LineOfLocations.createLine( ADJACENCY, DIRECTION, passedString ) )
+        assertThat( DirectedFilesLine.createLine( DIRECTION, passedString ) )
                   .as( "should return instance of LineOfLocations" )
-                  .isEqualTo( LineOfLocations.createLine( ADJACENCY, DIRECTION, expectedString ));
+                  .isEqualTo( DirectedFilesLine.createLine( DIRECTION, expectedString ));
     }
     
     @Test
     @DisplayName("createLine(): should return LineOfLocations when locations are defined as a diagonal from white to black")
     public void createLine_shouldReturnLineOfLocations_WhenLocationsAreDefinedAsADiagonalFromWhiteToBlack( ) {
         
-        AdjacencyEnum ADJACENCY = AdjacencyEnum.BY_POINT;
         Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
         String passedString = "d4 e5 f6 g7";
         String expectedString = "d4 e5 f6 g7";
 
-        assertThat( LineOfLocations.createLine( ADJACENCY, DIRECTION, passedString ) )
+        assertThat( DirectedFilesLine.createLine( DIRECTION, passedString ) )
                   .as( "should return instance of LineOfLocations" )
-                  .isEqualTo( LineOfLocations.createLine( ADJACENCY, DIRECTION, expectedString ));
+                  .isEqualTo( DirectedFilesLine.createLine( DIRECTION, expectedString ));
     }
     
     @Test
     @DisplayName("createLine(): should return LineOfLocations with normalized string when locations are defined")
     public void createLine_shouldReturnLineOfLocationsWithNormalizedString_WhenLocationsAreDefined( ) {
         
-        AdjacencyEnum ADJACENCY = AdjacencyEnum.BY_EDGE;
-        Direction DIRECTION = Direction.createBidirectionalDirection();
         String passedString = "e4 e5  e6 e7 e8 ";
         String expectedString = "e4 e5 e6 e7 e8";
 
-        assertThat( LineOfLocations.createLine( ADJACENCY, DIRECTION, passedString ) )
+        assertThat( UndirectedRowsLine.createLine( passedString ) )
                   .as( "should return instance of LineOfLocations" )
-                  .isEqualTo( LineOfLocations.createLine( ADJACENCY, DIRECTION, expectedString ));
+                  .isEqualTo( UndirectedRowsLine.createLine( expectedString ));
     }
     
     @Test
     @DisplayName("createLine(): should return LineOfLocations with normalized reversed string when locations are defined")
     public void createLine_shouldReturnLineOfLocationsWithNormalizedReversedString_WhenLocationsAreDefined( ) {
-        
-        AdjacencyEnum ADJACENCY = AdjacencyEnum.BY_EDGE;
-        Direction DIRECTION = Direction.createBidirectionalDirection();
+
         String passedString = " e8 e7  e6  e5 e4";
         String expectedString = "e4 e5 e6 e7 e8";
 
-        assertThat( LineOfLocations.createLine( ADJACENCY, DIRECTION, passedString ) )
+        assertThat( UndirectedRowsLine.createLine( passedString ) )
                   .as( "should return instance of LineOfLocations" )
-                  .isEqualTo( LineOfLocations.createLine( ADJACENCY, DIRECTION, expectedString ));
+                  .isEqualTo( UndirectedRowsLine.createLine( expectedString ));
     }
     
     @Test
     @DisplayName("createLine(): should return LineOfLocations with normalized reversed string when locations are defined")
     public void createLine_shouldReturnLineOfLocationsWithNormalizedString_WhenLocationsAreDefinedANDDirectioIsUnidirectional( ) {
         
-        AdjacencyEnum ADJACENCY = AdjacencyEnum.BY_EDGE;
         Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
         String passedString = " e8 e7  e6  e5 e4";
         String expectedString = "e8 e7 e6 e5 e4";
 
-        assertThat( LineOfLocations.createLine( ADJACENCY, DIRECTION, passedString ) )
+        assertThat( DirectedFilesLine.createLine( DIRECTION, passedString ) )
                   .as( "should return instance of LineOfLocations" )
-                  .isEqualTo( LineOfLocations.createLine( ADJACENCY, DIRECTION, expectedString ));
+                  .isEqualTo( DirectedFilesLine.createLine( DIRECTION, expectedString ));
     }
     
     @Test
     @DisplayName("createLine(): should return LineOfLocations ignoring string when less than two names are offered")
     public void createLine_shouldReturnLineOfLocationsIgnoringString_WhenLessThanTwoNamesAreOffered( ) {
-        
-        AdjacencyEnum ADJACENCY = AdjacencyEnum.BY_EDGE;
-        Direction DIRECTION = Direction.createBidirectionalDirection();
+
         String passedString = "e4 ";
         String expectedString = "";
 
-        assertThat( LineOfLocations.createLine( ADJACENCY, DIRECTION, passedString ) )
+        assertThat( UndirectedRowsLine.createLine( passedString ) )
                   .as( "should return instance of LineOfLocations" )
-                  .isEqualTo( LineOfLocations.createLine( ADJACENCY, DIRECTION, expectedString ));
+                  .isEqualTo( UndirectedRowsLine.createLine( expectedString ));
     }
 }
 

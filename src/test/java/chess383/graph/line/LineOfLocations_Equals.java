@@ -2,7 +2,7 @@
  *  LineOfLocations_Equals.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2019, 2020 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,10 +18,7 @@
  *  along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package chess383.graph.coordinate;
-
-import chess383.graph.adjacency.AdjacencyEnum;
-import chess383.graph.direction.Direction;
+package chess383.graph.line;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,23 +31,20 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   February 2020
  *
  */
 @DisplayName("the public method boolean equals( ) for class LineOfLocations is tested")
 public class LineOfLocations_Equals {
 
-    final AdjacencyEnum ADJACENCY = AdjacencyEnum.BY_EDGE;
-    final Direction DIRECTION = Direction.createBidirectionalDirection();
-    final Direction UNDIRECTED = Direction.createBidirectionalDirection();
-    final LineOfLocations EXPECTED_LINE = LineOfLocations.createLine( ADJACENCY, DIRECTION, "b2 c2 d2 e2" );
+    final LineOfLocations EXPECTED_LINE = UndirectedRowsLine.createLine( "b2 c2 d2 e2" );
     
     @Test
     @DisplayName("equals(): return value should be true when strings for LineOfLocations.createLine() are identical") 
     public void equals_shouldBeEqual_WhenStringsAreIdentical( ) {
 
-    	String inputLine = "b2 c2 d2 e2";
-        LineOfLocations discreteLine = LineOfLocations.createLine( ADJACENCY, DIRECTION, inputLine );
+        String inputLine = "b2 c2 d2 e2";
+        LineOfLocations discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings should be equal" )
@@ -61,8 +55,8 @@ public class LineOfLocations_Equals {
     @DisplayName("equals(): return value should be false when within the string for LineOfLocations.createLine() location names are missing") 
     public void equals_shouldNotBeEqual_WhenLocationNamesAreMissingWithinLine( ) {
 
-    	String inputLine = "b2 c2    e2";
-        LineOfLocations discreteLine = LineOfLocations.createLine( ADJACENCY, DIRECTION, inputLine );
+        String inputLine = "b2 c2    e2";
+        LineOfLocations discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings must not be equal" )
@@ -73,8 +67,8 @@ public class LineOfLocations_Equals {
     @DisplayName("equals(): return value should be true when strings for LineOfLocations.createLine() are similar but only differing for white spaces") 
     public void equals_shouldBeEqual_WhenStringsAreSimilarButOnlyDifferingForWhiteSpaces( ) {
 
-    	String inputLine = " b2 c2 d2  e2 ";
-        LineOfLocations discreteLine = LineOfLocations.createLine( ADJACENCY, DIRECTION, inputLine );
+        String inputLine = " b2 c2 d2  e2 ";
+        LineOfLocations discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings should be equal" )
@@ -85,8 +79,8 @@ public class LineOfLocations_Equals {
     @DisplayName("equals(): return value should be true when strings for LineOfLocations.createLine() are reversed but differing for white spaces") 
     public void equals_shouldBeEqual_WhenStringsAreReversedButDifferingForWhiteSpaces( ) {
 
-    	String inputLine = "e2 d2  c2 b2";
-        LineOfLocations discreteLine = LineOfLocations.createLine( ADJACENCY, UNDIRECTED, inputLine );
+        String inputLine = "e2 d2  c2 b2";
+        LineOfLocations discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings should be equal" )

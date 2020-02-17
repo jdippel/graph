@@ -1,8 +1,8 @@
 /*
- *  LineOfLocations_GetLocations.java
+ *  UndirectedRowsLine_GetLocations.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2020 Jörg Dippel
  *
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -17,11 +17,7 @@
  *  along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package chess383.graph.coordinate;
-
-import chess383.ColorEnum;
-import chess383.graph.adjacency.AdjacencyEnum;
-import chess383.graph.direction.Direction;
+package chess383.graph.line;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,30 +28,29 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 /**
  * <p>
- * The class LineOfLocations_GetLocations implements an upper tester
+ * The class UndirectedRowsLine_GetLocations implements an upper tester
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   February 2020
  *
  */
 
-@DisplayName("the public method String getLocations( ) for class LineOfLocations is tested")
-public class LineOfLocations_GetLocations {
+@DisplayName("the public method String getLocations( ) for class UndirectedRowsLine is tested")
+public class UndirectedRowsLine_GetLocations {
 
-	private final Direction UNDIRECTED = Direction.createBidirectionalDirection();
-	private final Direction DIRECTED = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
-    private final AdjacencyEnum ADJACENCY = AdjacencyEnum.BY_EDGE;
+//    private final Direction DIRECTED = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
     
     @ParameterizedTest
     @CsvSource({
-    	"b2 c2 d2 e2, b2 c2 d2 e2",
-    	 "  b2 c2    d2 e2   , b2 c2 d2 e2"
+        "b2 c2 d2 e2, b2 c2 d2 e2",
+         "  b2 c2    d2 e2   , b2 c2 d2 e2",
+         "  e2 d2    c2 b2   , b2 c2 d2 e2"
     })
     @DisplayName("getLocations(): should return a similar line of locations, but trimmed and normalized")
     void containsLocation( String inputLine, String expected ) {
 
-        LineOfLocations discreteLine = LineOfLocations.createLine( ADJACENCY, DIRECTED, inputLine );
+        UndirectedRowsLine discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "line of locations must be similar" )
@@ -64,12 +59,12 @@ public class LineOfLocations_GetLocations {
     
     @ParameterizedTest
     @CsvSource({
-    	"  e2 d2    c2 b2   , b2 c2 d2 e2"
+        "  e2 d2    c2 b2   , b2 c3 d2 e2"
     })
     @DisplayName("getLocations(): for a directed line the order of the locations is important")
     void lacksOrderofLocations( String inputLine, String expected ) {
 
-        LineOfLocations discreteLine = LineOfLocations.createLine( ADJACENCY, DIRECTED, inputLine );
+        UndirectedRowsLine discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "line of locations should not be similar" )
@@ -80,10 +75,10 @@ public class LineOfLocations_GetLocations {
     @DisplayName("getLocations(): should return a similar line of locations, but trimmed and normalized") 
     void getLocations_shouldBeEqual_WhenInputOnlyDiffersInTrimming( ) {
 
-    	String inputLine = "  b2 c2    d2 e2   ";
-    	String expected = "b2 c2 d2 e2";
-    	
-        LineOfLocations discreteLine = LineOfLocations.createLine( ADJACENCY, DIRECTED, inputLine );
+        String inputLine = "  b2 c2    d2 e2   ";
+        String expected = "b2 c2 d2 e2";
+        
+        UndirectedRowsLine discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "createLine() must process and trim String elements" )
@@ -94,10 +89,10 @@ public class LineOfLocations_GetLocations {
     @DisplayName("getLocations(): should return a similar line of locations, but trimmed and normalized also for reversed lines and direction is undirected") 
     void getLocations_shouldBeEqual_ForReversedInputButNotDirected( ) {
 
-    	String inputLine = "  e2 d2    c2 b2   ";
-    	String expected = "b2 c2 d2 e2";
-    	
-        LineOfLocations discreteLine = LineOfLocations.createLine( ADJACENCY, UNDIRECTED, inputLine );
+        String inputLine = "  e2 d2    c2 b2   ";
+        String expected = "b2 c2 d2 e2";
+        
+        UndirectedRowsLine discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "createLine() must must be sorted for not directed lines" )
@@ -105,13 +100,13 @@ public class LineOfLocations_GetLocations {
     }
     
     @Test
-    @DisplayName("getLocations(): should return empty string when null is passed by calling LineOfLocations.createLine()") 
+    @DisplayName("getLocations(): should return empty string when null is passed by calling UndirectedRowsLine.createLine()") 
     void getLocations_returnsEmptyString_WhenNullIsPassed( ) {
 
-    	String inputLine = null;
-    	String expected = "";
-    	
-        LineOfLocations discreteLine = LineOfLocations.createLine( ADJACENCY, DIRECTED, inputLine );
+        String inputLine = null;
+        String expected = "";
+        
+        UndirectedRowsLine discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "createLine() must handle NullPointer" )
@@ -119,13 +114,13 @@ public class LineOfLocations_GetLocations {
     }
     
     @Test
-    @DisplayName("getLocations(): should return empty string when only white spaces are passed by calling LineOfLocations.createLine()") 
+    @DisplayName("getLocations(): should return empty string when only white spaces are passed by calling UndirectedRowsLine.createLine()") 
     void getLocations_shouldBeEmptyString_WhenStringWithOnlyWhiteSpacesIsPassed( ) {
 
-    	String inputLine = "       ";
-    	String expected = "";
-    	
-        LineOfLocations discreteLine = LineOfLocations.createLine( ADJACENCY, DIRECTED, inputLine );
+        String inputLine = "       ";
+        String expected = "";
+        
+        UndirectedRowsLine discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.getLocations() )
                   .as( "createLine() must handle untrimmed strings" )
