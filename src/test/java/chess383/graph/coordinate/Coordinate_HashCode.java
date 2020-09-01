@@ -2,7 +2,7 @@
  *  Coordinate_HashCode.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2015 -2019 Jörg Dippel
+ *  Copyright (C) 2015 -2020 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,13 +25,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import chess383.graph.coordinate.CoordinateImpl;
-
 /**
  * The class Coordinate_HashCode implements an upper tester
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   July 2020
  *
  */
 @DisplayName("the public method int hashCode( ) for interface Coordinate is tested")

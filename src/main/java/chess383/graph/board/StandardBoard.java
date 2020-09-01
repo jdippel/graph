@@ -30,7 +30,7 @@ import chess383.graph.line.LineOfLocations;
  * Provides locations on a bundle of lines for a standard board.
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   August 2020
  *
  */
 public class StandardBoard extends LineBundle {
@@ -44,7 +44,7 @@ public class StandardBoard extends LineBundle {
     private List<LineOfLocations> create( ) {
         
         final int NUMBER_OF_LINES = 114;
-        List<LineOfLocations> factory = new ArrayList<>( NUMBER_OF_LINES );
+        List<LineOfLocations> factory = new ArrayList<LineOfLocations>( NUMBER_OF_LINES );
         
         factory.add( createRankLine(       "a1 b1 c1 d1 e1 f1 g1 h1" ) );
         factory.add( createRankLine(       "a2 b2 c2 d2 e2 f2 g2 h2" ) );

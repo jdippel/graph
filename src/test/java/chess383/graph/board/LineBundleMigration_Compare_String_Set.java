@@ -2,7 +2,7 @@
  *  LineBundleMigration_Compare_String_Set.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2019, 2020 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   August 2020
  *
  */
 @DisplayName("the public static method boolean compare() for class LineBundleMigration with two parameters String and Set<String> is tested")
@@ -47,7 +47,7 @@ public class LineBundleMigration_Compare_String_Set {
     @DisplayName("compare(): should return equality if the list elements each are equal")
     public void compare_shouldReturnTrue_ForIdenticalLists_FilledList( ) {
         
-        Set<String> set = new HashSet<>();
+        Set<String> set = new HashSet<String>();
         set.add( "e4 e5" );
         set.add( "e7 e8" );
         String separator = LineBundleMigration.getSetSeparator();
@@ -60,7 +60,7 @@ public class LineBundleMigration_Compare_String_Set {
     @DisplayName("compare(): should return equality for empty parameters")
     public void compare_shouldReturnTrue_ForEmptyParameters( ) {
         
-    	Set<String> set = new HashSet<>();
+    	Set<String> set = new HashSet<String>();
         String flattenedString = "";
 
         assertThat( LineBundleMigration.compare( flattenedString, set ) ).as( explanation ).isTrue();
@@ -70,7 +70,7 @@ public class LineBundleMigration_Compare_String_Set {
     @DisplayName("compare(): should return false for empty string but filled set")
     public void compare_shouldReturnFalse_ForEmptyStringButFilledSet( ) {
         
-    	Set<String> set = new HashSet<>();
+    	Set<String> set = new HashSet<String>();
         set.add( "e4 e5" );
         set.add( "e7 e8" );
         String flattenedString = "";
@@ -82,7 +82,7 @@ public class LineBundleMigration_Compare_String_Set {
     @DisplayName("compare(): should return false for filled string but empty set")
     public void compare_shouldReturnTrue_ForFilledStringButEmptyList( ) {
         
-    	Set<String> set = new HashSet<>();
+    	Set<String> set = new HashSet<String>();
         String flattenedString = "e4 e5";
 
         assertThat( LineBundleMigration.compare( flattenedString, set ) ).as( explanation ).isFalse();
@@ -92,7 +92,7 @@ public class LineBundleMigration_Compare_String_Set {
     @DisplayName("compare(): should return a difference if an element is missing within set")
     public void compare_shouldReturnFalse_IfAnyStringsAreMissingWithinSet( ) {
         
-        Set<String> set = new HashSet<>();
+        Set<String> set = new HashSet<String>();
         set.add( "e1 e2" );
         set.add( "e7 e8" );
         String separator = LineBundleMigration.getSetSeparator();

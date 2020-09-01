@@ -2,7 +2,7 @@
  *  ICoordinateFactory.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2019, 2020 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,19 +30,19 @@ import chess383.graph.board.TripleBoardByRectangles;
  * A line is a ordered list of names.
  *
  * @author    Jörg Dippel
- * @version   January 2019
+ * @version   August 2020
  *
  */
 public enum ICoordinateFactory {
     
-	STANDARD          { public ICoordinate createInstance( ) { return new StandardBoard( ); } },
-	THREE_DIMENSIONAL { public ICoordinate createInstance( ) { return new ThreeDimensionalBoard( ); } },
-	TRIPLE            { public ICoordinate createInstance( ) { return new TripleBoardByRectangles( ); } };
+	STANDARD          { protected ICoordinate createInstance( ) { return new StandardBoard( ); } },
+	THREE_DIMENSIONAL { protected ICoordinate createInstance( ) { return new ThreeDimensionalBoard( ); } },
+	TRIPLE            { protected ICoordinate createInstance( ) { return new TripleBoardByRectangles( ); } };
 	
 	
 	private ICoordinate board = ( ICoordinate ) null;
 	
-	public abstract ICoordinate createInstance( );
+	protected abstract ICoordinate createInstance( );
 	
 	public ICoordinate get( ) {
 		

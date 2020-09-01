@@ -28,7 +28,7 @@ import java.util.Set;
  * Collects lines for a bundle of lines.
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   August 2020
  *
  */
 public class LineCollector {
@@ -46,7 +46,7 @@ public class LineCollector {
     
     /** ---------  Getter and Setter  ------------------------- */
 
-    private void setAccumulator( )            { this.accumulator = new HashSet<>( 0 ); }
+    private void setAccumulator( )            { this.accumulator = new HashSet<List<String>>( 0 ); }
     public Set<List<String>> getAccumulator() { return this.accumulator; }
     
     /** ------------------------------------------------------- */

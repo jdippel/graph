@@ -2,7 +2,7 @@
  *  LineBundleMigration_ConvertToList.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2019, 2020 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   August 2020
  */
 @DisplayName("the public static method String convertToList() for class LineBundleMigration is tested")
 public class LineBundleMigration_ConvertToList { 
@@ -58,7 +58,7 @@ public class LineBundleMigration_ConvertToList {
     	
     	String passedString = "e4 e5 e6 e7 e8";
     	
-    	List<String> expectedList = new ArrayList<>();
+    	List<String> expectedList = new ArrayList<String>();
     	expectedList.add( "e4" );
     	expectedList.add( "e5" );
     	expectedList.add( "e6" );

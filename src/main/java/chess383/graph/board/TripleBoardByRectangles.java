@@ -31,7 +31,7 @@ import chess383.graph.line.LineOfLocations;
  * Provides locations on a bundle of lines for a board for three players: rectangles within a hexagon.
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   August 2020
  *
  */
 public class TripleBoardByRectangles extends LineBundle {
@@ -49,7 +49,7 @@ public class TripleBoardByRectangles extends LineBundle {
     
     private List<LineOfLocations> create( ) {
         
-        List<LineOfLocations> factory = new ArrayList<>( 407 );
+        List<LineOfLocations> factory = new ArrayList<LineOfLocations>( 407 );
         
         // createFileLine( VERTICAL, value )
         

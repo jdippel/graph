@@ -27,8 +27,6 @@ import org.junit.jupiter.api.Test;
 
 import chess383.ColorEnum;
 import chess383.graph.direction.Direction;
-import chess383.graph.line.DirectedFilesLine;
-
 
 /**
  * <p>
@@ -36,7 +34,7 @@ import chess383.graph.line.DirectedFilesLine;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   July 2020
  */
 @DisplayName("the public static method DirectedFilesLine_CreateLine createLine() for class DirectedFilesLine is tested")
 public class DirectedFilesLine_CreateLine { 

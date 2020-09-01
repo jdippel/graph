@@ -2,7 +2,7 @@
  *  Direction_ToString.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2018, 2019 Jörg Dippel
+ *  Copyright (C) 2018 - 2020 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import chess383.ColorEnum;
-import chess383.graph.direction.Direction;
 
 /**
  * <p>
@@ -35,7 +34,7 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   July 2020
  *
  */
 @DisplayName("the public method String toString( ) for class Direction is tested")

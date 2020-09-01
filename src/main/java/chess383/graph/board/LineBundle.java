@@ -40,7 +40,7 @@ import chess383.graph.line.UndirectedRowsLine;
  * A bundle of lines through a given location is a set of lines which contain the location each.
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   August 2020
  *
  */
 public abstract class LineBundle implements ICoordinate {
@@ -96,7 +96,7 @@ public abstract class LineBundle implements ICoordinate {
     
     public Set<List<String>> getLineBundles( String location ) {
         
-        Set<List<String>> result = new HashSet<>( );
+        Set<List<String>> result = new HashSet<List<String>>( );
         
         List<LineOfLocations> lineBundles = getBundle( );
         for( LineOfLocations line : lineBundles ) {
@@ -166,7 +166,7 @@ public abstract class LineBundle implements ICoordinate {
 
     public Set<String> getAllLocations() {
         
-         Set<String> result = new HashSet<>( );
+         Set<String> result = new HashSet<String>( );
             
          List<LineOfLocations> lineBundles = getBundle( );
          for( LineOfLocations line : lineBundles ) {

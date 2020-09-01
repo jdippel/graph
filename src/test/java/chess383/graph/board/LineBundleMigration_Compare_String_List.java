@@ -2,7 +2,7 @@
  *  LineBundleMigration_Compare_String_List.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2019, 2020 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   August 2020
  *
  */
 @DisplayName("the public static method boolean compare() for class LineBundleMigration with two parameters String and List<String> is tested")
@@ -59,7 +59,7 @@ public class LineBundleMigration_Compare_String_List {
     @DisplayName("compare(): should return equality for empty parameters")
     public void compare_shouldReturnTrue_ForEmptyParameters( ) {
         
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<String>();
         String flattenedString = "";
 
         assertThat( LineBundleMigration.compare( flattenedString, list ) ).as( explanation ).isTrue();
@@ -79,7 +79,7 @@ public class LineBundleMigration_Compare_String_List {
     @DisplayName("compare(): should return false for filled string but empty list")
     public void compare_shouldReturnTrue_ForFilledStringButEmptyList( ) {
         
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<String>();
         String flattenedString = "e4 e5";
 
         assertThat( LineBundleMigration.compare( flattenedString, list ) ).as( explanation ).isFalse();

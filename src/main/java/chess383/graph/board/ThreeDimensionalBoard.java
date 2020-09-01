@@ -30,7 +30,7 @@ import chess383.graph.line.LineOfLocations;
  * Please have a look to the descriptions of rules, search for rules by Jens Meder ...
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   August 2020
  *
  */
 public class ThreeDimensionalBoard extends LineBundle {
@@ -43,7 +43,7 @@ public class ThreeDimensionalBoard extends LineBundle {
     
     private List<LineOfLocations> create( ) {
         
-        List<LineOfLocations> factory = new ArrayList<>( 12 + 6 + 26 + 66 );
+        List<LineOfLocations> factory = new ArrayList<LineOfLocations>( 12 + 6 + 26 + 66 );
        
         factory.add( createRankLine( "z0 a0" ) );
         factory.add( createRankLine( "d0 e0" ) );

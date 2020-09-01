@@ -2,7 +2,7 @@
  *  LineBundleMigration.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2015-2019 Jörg Dippel
+ *  Copyright (C) 2015-2020 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ import java.util.Set;
  * Provides static migration or conversion methods between types.
  *
  * @author    Jörg Dippel
- * @version   October 2019
+ * @version   August 2020
  */
 public class LineBundleMigration {
 
@@ -41,7 +41,7 @@ public class LineBundleMigration {
     public static List<String> convertToList( String list ) {
 
         String[] tokens = list.split( "\\s+" );
-        List<String> result = new ArrayList<>( tokens.length );
+        List<String> result = new ArrayList<String>( tokens.length );
         
         for( String token : tokens ) {
             if( token.length( ) > 0 ) {
@@ -53,7 +53,7 @@ public class LineBundleMigration {
     
     public static List<String> extractListForGivenDirection( String list, String location ) {
         
-        List<String> result = new ArrayList<>( );
+        List<String> result = new ArrayList<String>( );
         
         String[] tokens = list.split( "\\s+" );
         int cursor = 0;
@@ -77,7 +77,7 @@ public class LineBundleMigration {
     
     public static List<String> extractListForReversedDirection( String list, String location ) {
         
-        List<String> result = new ArrayList<>( );
+        List<String> result = new ArrayList<String>( );
         
         String[] tokens = list.split( "\\s+" );
         int cursor = 0;
@@ -101,7 +101,7 @@ public class LineBundleMigration {
    
     public static Set<String> flatten( Set<List<String>> bundle ) {
         
-        Set<String> result = new HashSet<>( );
+        Set<String> result = new HashSet<String>( );
         
         for( List<String> line : bundle ) {
             

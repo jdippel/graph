@@ -2,7 +2,7 @@
  *  LineBundleMigration_Compare_List_List.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2019, 2020 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   August 2020
  *
  */
 @DisplayName("the public static method boolean compare() for class LineBundleMigration with two parameters List<String> and List<String> is tested")
@@ -66,7 +66,7 @@ public class LineBundleMigration_Compare_List_List {
     @DisplayName("compare(): should return equality if the order and the list elements each are equal")
     public void compare_shouldReturnTrue_ForIdenticalLists_SpecialCaseListIsEmpty( ) {
         
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<String>();
 
         assertThat( list.isEmpty() ).as( "special case: it is a list but an empty list" ).isTrue();
         assertThat( LineBundleMigration.compare( list, list ) ).as( explanation ).isTrue();
@@ -87,7 +87,7 @@ public class LineBundleMigration_Compare_List_List {
         
         List<String> list = Arrays.asList( "e4 e5 e6" );;
 
-        assertThat( LineBundleMigration.compare( new ArrayList<>(), list ) ).as( explanation ).isFalse();
+        assertThat( LineBundleMigration.compare( new ArrayList<String>(), list ) ).as( explanation ).isFalse();
     }
     
     @Test
@@ -96,7 +96,7 @@ public class LineBundleMigration_Compare_List_List {
         
         List<String> list = Arrays.asList( "e4 e5 e6" );;
 
-        assertThat( LineBundleMigration.compare( list, new ArrayList<>() ) ).as( explanation ).isFalse();
+        assertThat( LineBundleMigration.compare( list, new ArrayList<String>() ) ).as( explanation ).isFalse();
     }
     
     @Test

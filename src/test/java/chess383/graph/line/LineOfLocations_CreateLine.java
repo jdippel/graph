@@ -2,7 +2,7 @@
  *  LineOfLocations_CreateLine.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2019, 2020 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,10 +27,6 @@ import org.junit.jupiter.api.Test;
 
 import chess383.ColorEnum;
 import chess383.graph.direction.Direction;
-import chess383.graph.line.DirectedFilesLine;
-import chess383.graph.line.LineOfLocations;
-import chess383.graph.line.UndirectedRowsLine;
-
 
 /**
  * <p>
@@ -38,7 +34,7 @@ import chess383.graph.line.UndirectedRowsLine;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   July 2020
  */
 @DisplayName("the public static method LineOfLocations createLine() for class LineOfLocations is tested")
 public class LineOfLocations_CreateLine { 
