@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.chess383</groupId>
   <artifactId>graph</artifactId>
-  <!-- version 5.1.0 == 4.4.16 -->
-  <version>5.1.0</version>
+  <!-- version 5.2.0 == 4.4.17 -->
+  <version>5.2.0</version>
   <packaging>jar</packaging>
   <description>chess board architecture</description>
     
@@ -45,7 +45,6 @@
   </dependencies>
   
   <build>
-    <pluginManagement>
       <plugins>
           <plugin>
               <!-- Note that at present the default source setting is 1.6 and the default target setting is 1.6, 
@@ -166,7 +165,6 @@
              <version>3.0.0-M1</version>
           </plugin>
       </plugins>
-    </pluginManagement>
   </build>
   
   <reporting>
