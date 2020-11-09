@@ -1,5 +1,21 @@
-# graph
-chess library - chess board infrastructure
+# README #
+
+This README documents a chess library for chess board infrastructure.
+
+### What is this repository for? ###
+
+* a library for chess board infrastructure
+* Version 5.4.0
+
+### How do I get set up? ###
+
+* This library will be included as a dependency
+
+### Who do I talk to? ###
+
+* Repo owner or admin
+
+# graph #
 
 The rules of chess (also known as the laws of chess) are rules governing the play of the game of chess.
 Chess is a board game utilizing a chessboard.
@@ -17,7 +33,7 @@ without tees or branches. The ordered list of nodes is the concept of a line wit
 If a piece is located on a square, this means, the peace can move along a line of nodes.
 If a piece can move into different directions there is a bundle of lines to move along.
 
-
 graph is a layer of chess383 to provide the bundle of lines to move along.
 
-# graph is a library for a generalized chess board.
+# graph is a library for a generalized chess board. #
+

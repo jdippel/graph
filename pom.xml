@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.chess383</groupId>
   <artifactId>graph</artifactId>
-  <!-- version 5.2.0 == 4.4.17 -->
-  <version>5.2.0</version>
+  <!-- version 5.4.0 == 5.3.1 -->
+  <version>5.4.0</version>
   <packaging>jar</packaging>
   <description>chess board architecture</description>
     
@@ -199,7 +199,7 @@
          <name>Joerg Dippel</name>
          <email>chess383@jdippel.de</email>
          <roles>
-             <role>architect</role>
+             <role>leadership in definitions and design of fundamental concepts</role>
              <role>developer</role>
          </roles>
          <timezone>Europe/Berlin</timezone>
