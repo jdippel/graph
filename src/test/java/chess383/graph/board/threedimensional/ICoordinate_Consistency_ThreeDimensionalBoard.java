@@ -2,7 +2,7 @@
  *  ICoordinate_Consistency_ThreeDimensionalBoard.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2017 - 2019 Jörg Dippel
+ *  Copyright (C) 2017 - 2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,13 +34,11 @@ import chess383.graph.board.ICoordinate_Consistency_Wrapper;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   January 2021
  *
  */
 @DisplayName("the public method Set<List<String>> getLineBundles() for class ICoordinate_Consistency_ThreeDimensionalBoard is tested")
 public class ICoordinate_Consistency_ThreeDimensionalBoard extends ICoordinate_Consistency_Wrapper { 
-
-    static { setBoard( ICoordinateFactory.THREE_DIMENSIONAL.get( ) ); }
     
     @ParameterizedTest( name = "given a three-dimensional board from location {0} someone can move to: {1}, {2} or {3}")
     @DisplayName("given a alocation then following locations can be reached in an area of distance two")
@@ -102,7 +100,7 @@ public class ICoordinate_Consistency_ThreeDimensionalBoard extends ICoordinate_C
                  "z9, a9 z7 z8, a8 b7, a7 b8"
     })
     void test( String location, String expectedRooks, String expectedBishops, String expectedKnights ) {
-        givenALocation_verifyTheLocationsForVariousTransformations( location, expectedRooks, expectedBishops, expectedKnights );
+        givenALocation_verifyTheLocationsForVariousTransformations( ICoordinateFactory.THREE_DIMENSIONAL.get(), location, expectedRooks, expectedBishops, expectedKnights );
     }
 }
 

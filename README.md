@@ -5,7 +5,7 @@ This README documents a chess library for chess board infrastructure.
 ### What is this repository for? ###
 
 * a library for chess board infrastructure
-* Version 5.4.0
+* Version 5.5.0
 
 ### How do I get set up? ###
 

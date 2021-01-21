@@ -2,7 +2,7 @@
  *  ICoordinate_Consistency_Wrapper.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2017 - 2019 Jörg Dippel
+ *  Copyright (C) 2017 - 2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   January 2021
  *
  */
 public class ICoordinate_Consistency_Wrapper { 
@@ -48,11 +48,6 @@ public class ICoordinate_Consistency_Wrapper {
     final Direction UNSPECIFIED_DIRECTION = Direction.createBidirectionalDirection( );
     
     final int AREA_SIZE = 2;
-
-    protected static ICoordinate board;
-    protected static void setBoard( ICoordinate value ) { 
-    	board = value; 
-    }
 
     private void includeSetOfLocations( String expected, Set<String> locations ) {
         
@@ -66,7 +61,7 @@ public class ICoordinate_Consistency_Wrapper {
     private void compareSetOfLocations( String expected, Set<String> locations ) {
         
         String[] tokens = expected.split( "\\s+" );
-        assertThat( tokens.length ).as( "sets must be of same size:" ).isEqualTo( locations.size() );
+        assertThat( tokens.length ).as( "sets must be of same size" ).isEqualTo( locations.size() );
         for( String location : tokens ) {
             assertThat( locations.contains( location ) ).as( String.format( "Locations %s must be within the set", location ) ).isTrue();
         }
@@ -204,7 +199,7 @@ public class ICoordinate_Consistency_Wrapper {
         return( true );
     }
     
-    public void givenALocation_verifyTheLocationsForVariousTransformations ( String location, String expectedRooks, String expectedBishops, String expectedKnights ) {
+    public void givenALocation_verifyTheLocationsForVariousTransformations ( ICoordinate board, String location, String expectedRooks, String expectedBishops, String expectedKnights ) {
         
         Set<String> rooks = getByEdgeConnectedLocationsOfArea( board, location );
         Set<String> bishops = getByPointConnectedLocationsOfArea( board, location );

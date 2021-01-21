@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.chess383</groupId>
   <artifactId>graph</artifactId>
-  <!-- version 5.4.0 == 5.3.1 -->
-  <version>5.4.0</version>
+  <!-- version 5.5.0 == 5.4.5 -->
+  <version>5.5.0</version>
   <packaging>jar</packaging>
   <description>chess board architecture</description>
     
@@ -15,35 +15,63 @@
         <java.target.version>11</java.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        
+        <chess383.chessexception.version>1.2.0</chess383.chessexception.version>
+        <junit-jupiter-api.version>5.7.0</junit-jupiter-api.version>
+        <junit-jupiter-engine.version>5.7.0</junit-jupiter-engine.version>
+        <junit-jupiter-params.version>5.7.0</junit-jupiter-params.version>
+        <assertj-core.version>3.18.1</assertj-core.version>
+        
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+        <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
+        <pitest-maven.version>1.6.2</pitest-maven.version>
+        <pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
+        <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+        <requireMavenVersion.version>3.2.5</requireMavenVersion.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <maven-site-plugin.version>3.9.1</maven-site-plugin.version>
+        <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+        <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+        <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
+        
+        <maven-project-info-reports-plugin.version>3.1.1</maven-project-info-reports-plugin.version>
+        <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
   </properties>
-  
+
   <dependencies>
+      <dependency>
+        <groupId>de.chess383</groupId>
+        <artifactId>chessexception</artifactId>
+        <version>${chess383.chessexception.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-api</artifactId>
-        <version>5.5.2</version>
+        <version>${junit-jupiter-api.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-engine</artifactId>
-        <version>5.5.2</version>
+        <version>${junit-jupiter-engine.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-params</artifactId>
-        <version>5.5.2</version>
+        <version>${junit-jupiter-params.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.14.0</version>
+        <version>${assertj-core.version}</version>
         <scope>test</scope>
       </dependency>
   </dependencies>
-  
+
   <build>
       <plugins>
           <plugin>
@@ -52,7 +80,7 @@
                    You are highly encouraged to change these defaults by setting source and target -->
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-compiler-plugin</artifactId>
-              <version>3.8.1</version>
+              <version>${maven-compiler-plugin.version}</version>
               <configuration>
                   <source>${java.src.version}</source>
                   <target>${java.target.version}</target>
@@ -61,7 +89,7 @@
           <plugin>
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-jar-plugin</artifactId>
-             <version>3.2.0</version>
+             <version>${maven-jar-plugin.version}</version>
              <configuration>
                <archive>
                   <manifest>
@@ -78,19 +106,19 @@
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-failsafe-plugin</artifactId>
-              <version>3.0.0-M5</version>
+              <version>${maven-failsafe-plugin.version}</version>
           </plugin>
           <plugin>
              <!-- This plugin can be invoked by calling from the command line, just call
                  mvn org.pitest:pitest-maven:mutationCoverage -->
              <groupId>org.pitest</groupId>
              <artifactId>pitest-maven</artifactId>
-             <version>1.5.2</version>
+             <version>${pitest-maven.version}</version>
              <dependencies>
                <dependency>
                   <groupId>org.pitest</groupId>
                   <artifactId>pitest-junit5-plugin</artifactId>
-                  <version>0.10</version>
+                  <version>${pitest-junit5-plugin.version}</version>
                </dependency>
              </dependencies>
              <configuration>
@@ -106,7 +134,7 @@
              <!-- minimal maven version is required by versions-maven-plugin -->
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-enforcer-plugin</artifactId>
-             <version>3.0.0-M3</version>
+             <version>${maven-enforcer-plugin.version}</version>
              <executions>
                 <execution>
                    <id>enforce-maven</id>
@@ -116,7 +144,7 @@
                    <configuration>
                       <rules>
                          <requireMavenVersion>
-                            <version>3.2.5</version>
+                            <version>${requireMavenVersion.version}</version>
                          </requireMavenVersion>
                       </rules>    
                    </configuration>
@@ -126,7 +154,7 @@
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-surefire-plugin</artifactId>
-              <version>3.0.0-M5</version>
+              <version>${maven-surefire-plugin.version}</version>
               <configuration>
                 <includes>
                     <include>**/*.java</include>
@@ -134,35 +162,35 @@
               </configuration>
           </plugin>
           <plugin>
-            <!-- This plugin can be invoked by calling the test phase of the build lifecycle, just call
+              <!-- This plugin can be invoked by calling the test phase of the build lifecycle, just call
                  mvn test -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-site-plugin</artifactId>
-            <version>3.9.1</version>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-site-plugin</artifactId>
+             <version>${maven-site-plugin.version}</version>
           </plugin>
           <plugin>
              <!-- updated version is required by versions-maven-plugin -->
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-clean-plugin</artifactId>
-             <version>3.1.0</version>
+             <version>${maven-clean-plugin.version}</version>
           </plugin>
           <plugin>
              <!-- updated version is required by versions-maven-plugin -->
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-resources-plugin</artifactId>
-             <version>3.2.0</version>
+             <version>${maven-resources-plugin.version}</version>
           </plugin>
           <plugin>
              <!-- updated version is required by versions-maven-plugin -->
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-deploy-plugin</artifactId>
-             <version>3.0.0-M1</version>
+             <version>${maven-deploy-plugin.version}</version>
           </plugin>
           <plugin>
              <!-- updated version is required by versions-maven-plugin -->
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-install-plugin</artifactId>
-             <version>3.0.0-M1</version>
+             <version>${maven-install-plugin.version}</version>
           </plugin>
       </plugins>
   </build>
@@ -174,14 +202,14 @@
              mvn site -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>${maven-project-info-reports-plugin.version}</version>
       </plugin>
       <plugin>
         <!-- This plugin is used to check the plugin updates, just call
              mvn versions:display-plugin-updates -->
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
-        <version>2.8.1</version>
+        <version>${versions-maven-plugin.version}</version>
       </plugin>
     </plugins>
   </reporting>

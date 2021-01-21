@@ -2,7 +2,7 @@
  *  ICoordinate_Consistency_StandardBoard.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2017 - 2019 Jörg Dippel
+ *  Copyright (C) 2017 - 2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,13 +34,11 @@ import chess383.graph.board.ICoordinate_Consistency_Wrapper;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   January 2021
  *
  */
 @DisplayName("the public method Set<List<String>> getLineBundles() for class ICoordinate_Consistency_StandardBoard is tested")
 public class ICoordinate_Consistency_StandardBoard extends ICoordinate_Consistency_Wrapper { 
-
-    static { setBoard( ICoordinateFactory.STANDARD.get( ) ); }
     
     @ParameterizedTest( name = "given a standard board from location {0} someone can move to: {1}, {2} or {3}" )
     @DisplayName("given a location then following locations can be reached in  an area of distance two")
@@ -109,7 +107,7 @@ public class ICoordinate_Consistency_StandardBoard extends ICoordinate_Consisten
                  "h7, f7 g7 h5 h6 h8, f5 g6 g8, f6 f8 g5",  
                  "h8, f8 g8 h6 h7, f6 g7, f7 g6" })
     void test( String location, String expectedRooks, String expectedBishops, String expectedKnights ) {
-        givenALocation_verifyTheLocationsForVariousTransformations( location, expectedRooks, expectedBishops, expectedKnights );
+        givenALocation_verifyTheLocationsForVariousTransformations( ICoordinateFactory.STANDARD.get(), location, expectedRooks, expectedBishops, expectedKnights );
     }
 }
 
