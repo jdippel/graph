@@ -171,6 +171,9 @@
               <executions>
                   <execution>
                       <phase>verify</phase>
+                      <goals>
+                          <goal>mutationCoverage</goal>
+                      </goals>
                   </execution>
               </executions>
           </plugin>
