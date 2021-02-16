@@ -75,6 +75,39 @@
   <build>
       <plugins>
           <plugin>
+              <!-- updated version is required by versions-maven-plugin -->
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-clean-plugin</artifactId>
+              <version>${maven-clean-plugin.version}</version>
+          </plugin>
+          <plugin>
+              <!-- updated version is required by versions-maven-plugin -->
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-resources-plugin</artifactId>
+              <version>${maven-resources-plugin.version}</version>
+          </plugin>
+          <plugin>
+              <!-- minimal maven version is required by versions-maven-plugin -->
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-enforcer-plugin</artifactId>
+              <version>${maven-enforcer-plugin.version}</version>
+              <executions>
+                  <execution>
+                      <id>enforce-maven</id>
+                      <goals>
+                          <goal>enforce</goal>
+                      </goals>
+                      <configuration>
+                          <rules>
+                              <requireMavenVersion>
+                                  <version>${requireMavenVersion.version}</version>
+                              </requireMavenVersion>
+                          </rules>
+                      </configuration>
+                  </execution>
+              </executions>
+          </plugin>
+          <plugin>
               <!-- Note that at present the default source setting is 1.6 and the default target setting is 1.6, 
                    independently of the JDK you run Maven with. 
                    You are highly encouraged to change these defaults by setting source and target -->
@@ -103,10 +136,16 @@
                </archive>
              </configuration>
           </plugin>
+
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-failsafe-plugin</artifactId>
-              <version>${maven-failsafe-plugin.version}</version>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>${maven-surefire-plugin.version}</version>
+              <configuration>
+                  <includes>
+                      <include>**/*.java</include>
+                  </includes>
+              </configuration>
           </plugin>
           <plugin>
              <!-- This plugin can be invoked by calling from the command line, just call
@@ -129,38 +168,18 @@
                  <param>chess383.graph*</param>
                </targetTests>
              </configuration>
-          </plugin>
-          <plugin>
-             <!-- minimal maven version is required by versions-maven-plugin -->
-             <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-enforcer-plugin</artifactId>
-             <version>${maven-enforcer-plugin.version}</version>
-             <executions>
-                <execution>
-                   <id>enforce-maven</id>
-                   <goals>
-                      <goal>enforce</goal>
-                   </goals>
-                   <configuration>
-                      <rules>
-                         <requireMavenVersion>
-                            <version>${requireMavenVersion.version}</version>
-                         </requireMavenVersion>
-                      </rules>    
-                   </configuration>
-                </execution>
-             </executions>
+              <executions>
+                  <execution>
+                      <phase>verify</phase>
+                  </execution>
+              </executions>
           </plugin>
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-surefire-plugin</artifactId>
-              <version>${maven-surefire-plugin.version}</version>
-              <configuration>
-                <includes>
-                    <include>**/*.java</include>
-                </includes>
-              </configuration>
+              <artifactId>maven-failsafe-plugin</artifactId>
+              <version>${maven-failsafe-plugin.version}</version>
           </plugin>
+
           <plugin>
               <!-- This plugin can be invoked by calling the test phase of the build lifecycle, just call
                  mvn test -->
@@ -171,26 +190,14 @@
           <plugin>
              <!-- updated version is required by versions-maven-plugin -->
              <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-clean-plugin</artifactId>
-             <version>${maven-clean-plugin.version}</version>
-          </plugin>
-          <plugin>
-             <!-- updated version is required by versions-maven-plugin -->
-             <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-resources-plugin</artifactId>
-             <version>${maven-resources-plugin.version}</version>
-          </plugin>
-          <plugin>
-             <!-- updated version is required by versions-maven-plugin -->
-             <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-deploy-plugin</artifactId>
-             <version>${maven-deploy-plugin.version}</version>
-          </plugin>
-          <plugin>
-             <!-- updated version is required by versions-maven-plugin -->
-             <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-install-plugin</artifactId>
              <version>${maven-install-plugin.version}</version>
+          </plugin>
+          <plugin>
+              <!-- updated version is required by versions-maven-plugin -->
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-deploy-plugin</artifactId>
+              <version>${maven-deploy-plugin.version}</version>
           </plugin>
       </plugins>
   </build>
