@@ -1,27 +1,27 @@
-<project 
-  xmlns="http://maven.apache.org/POM/4.0.0" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>de.chess383</groupId>
-  <artifactId>graph</artifactId>
-  <!-- version 5.5.0 == 5.4.5 -->
-  <version>5.5.0</version>
-  <packaging>jar</packaging>
-  <description>chess board architecture</description>
-    
-  <properties>
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.chess383</groupId>
+    <artifactId>graph</artifactId>
+    <!-- version 5.5.0 == 5.4.5 -->
+    <version>5.5.0</version>
+    <packaging>jar</packaging>
+    <description>chess board architecture</description>
+
+    <properties>
         <java.src.version>11</java.src.version>
         <java.target.version>11</java.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
-        
+
         <chess383.chessexception.version>1.2.0</chess383.chessexception.version>
         <junit-jupiter-api.version>5.7.0</junit-jupiter-api.version>
         <junit-jupiter-engine.version>5.7.0</junit-jupiter-engine.version>
         <junit-jupiter-params.version>5.7.0</junit-jupiter-params.version>
         <assertj-core.version>3.18.1</assertj-core.version>
-        
+
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
@@ -35,213 +35,229 @@
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
-        
+
         <maven-project-info-reports-plugin.version>3.1.1</maven-project-info-reports-plugin.version>
         <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
-  </properties>
+    </properties>
 
-  <dependencies>
-      <dependency>
-        <groupId>de.chess383</groupId>
-        <artifactId>chessexception</artifactId>
-        <version>${chess383.chessexception.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-api</artifactId>
-        <version>${junit-jupiter-api.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-engine</artifactId>
-        <version>${junit-jupiter-engine.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-params</artifactId>
-        <version>${junit-jupiter-params.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.assertj</groupId>
-        <artifactId>assertj-core</artifactId>
-        <version>${assertj-core.version}</version>
-        <scope>test</scope>
-      </dependency>
-  </dependencies>
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>GitHub PIUG Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/PIUGroup/</url>
+        </repository>
+    </repositories>
 
-  <build>
-      <plugins>
-          <plugin>
-              <!-- updated version is required by versions-maven-plugin -->
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-clean-plugin</artifactId>
-              <version>${maven-clean-plugin.version}</version>
-          </plugin>
-          <plugin>
-              <!-- updated version is required by versions-maven-plugin -->
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-resources-plugin</artifactId>
-              <version>${maven-resources-plugin.version}</version>
-          </plugin>
-          <plugin>
-              <!-- minimal maven version is required by versions-maven-plugin -->
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-enforcer-plugin</artifactId>
-              <version>${maven-enforcer-plugin.version}</version>
-              <executions>
-                  <execution>
-                      <id>enforce-maven</id>
-                      <goals>
-                          <goal>enforce</goal>
-                      </goals>
-                      <configuration>
-                          <rules>
-                              <requireMavenVersion>
-                                  <version>${requireMavenVersion.version}</version>
-                              </requireMavenVersion>
-                          </rules>
-                      </configuration>
-                  </execution>
-              </executions>
-          </plugin>
-          <plugin>
-              <!-- Note that at present the default source setting is 1.6 and the default target setting is 1.6, 
-                   independently of the JDK you run Maven with. 
-                   You are highly encouraged to change these defaults by setting source and target -->
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <version>${maven-compiler-plugin.version}</version>
-              <configuration>
-                  <source>${java.src.version}</source>
-                  <target>${java.target.version}</target>
-              </configuration>
-          </plugin>
-          <plugin>
-             <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-jar-plugin</artifactId>
-             <version>${maven-jar-plugin.version}</version>
-             <configuration>
-               <archive>
-                  <manifest>
-                  <addDefaultEntries>true</addDefaultEntries>
-                  <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                  <addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
-                  </manifest>
-                  <manifestEntries>
-                    <Build-Time>${maven.build.timestamp}</Build-Time>
-                  </manifestEntries>
-               </archive>
-             </configuration>
-          </plugin>
+    <dependencies>
+        <dependency>
+            <groupId>de.chess383</groupId>
+            <artifactId>chessexception</artifactId>
+            <version>${chess383.chessexception.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter-api.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter-engine.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit-jupiter-params.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-surefire-plugin</artifactId>
-              <version>${maven-surefire-plugin.version}</version>
-              <configuration>
-                  <includes>
-                      <include>**/*.java</include>
-                  </includes>
-              </configuration>
-          </plugin>
-          <plugin>
-             <!-- This plugin can be invoked by calling from the command line, just call
-                 mvn org.pitest:pitest-maven:mutationCoverage -->
-             <groupId>org.pitest</groupId>
-             <artifactId>pitest-maven</artifactId>
-             <version>${pitest-maven.version}</version>
-             <dependencies>
-               <dependency>
-                  <groupId>org.pitest</groupId>
-                  <artifactId>pitest-junit5-plugin</artifactId>
-                  <version>${pitest-junit5-plugin.version}</version>
-               </dependency>
-             </dependencies>
-             <configuration>
-               <targetClasses>
-                 <param>chess383.graph*</param>
-               </targetClasses>
-               <targetTests>
-                 <param>chess383.graph*</param>
-               </targetTests>
-             </configuration>
-              <executions>
-                  <execution>
-                      <phase>verify</phase>
-                      <goals>
-                          <goal>mutationCoverage</goal>
-                      </goals>
-                  </execution>
-              </executions>
-          </plugin>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-failsafe-plugin</artifactId>
-              <version>${maven-failsafe-plugin.version}</version>
-          </plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <!-- updated version is required by versions-maven-plugin -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven-clean-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <!-- updated version is required by versions-maven-plugin -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <!-- minimal maven version is required by versions-maven-plugin -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>${requireMavenVersion.version}</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- Note that at present the default source setting is 1.6 and the default target setting is 1.6,
+                     independently of the JDK you run Maven with.
+                     You are highly encouraged to change these defaults by setting source and target -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.src.version}</source>
+                    <target>${java.target.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultEntries>true</addDefaultEntries>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Build-Time>${maven.build.timestamp}</Build-Time>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
 
-          <plugin>
-              <!-- This plugin can be invoked by calling the test phase of the build lifecycle, just call
-                 mvn test -->
-             <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-site-plugin</artifactId>
-             <version>${maven-site-plugin.version}</version>
-          </plugin>
-          <plugin>
-             <!-- updated version is required by versions-maven-plugin -->
-             <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-install-plugin</artifactId>
-             <version>${maven-install-plugin.version}</version>
-          </plugin>
-          <plugin>
-              <!-- updated version is required by versions-maven-plugin -->
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-deploy-plugin</artifactId>
-              <version>${maven-deploy-plugin.version}</version>
-          </plugin>
-      </plugins>
-  </build>
-  
-  <reporting>
-    <plugins>
-      <plugin>
-        <!-- This plugin would generate the project info reports, just call
-             mvn site -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>${maven-project-info-reports-plugin.version}</version>
-      </plugin>
-      <plugin>
-        <!-- This plugin is used to check the plugin updates, just call
-             mvn versions:display-plugin-updates -->
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>versions-maven-plugin</artifactId>
-        <version>${versions-maven-plugin.version}</version>
-      </plugin>
-    </plugins>
-  </reporting>
-  
-  <licenses>
-      <license>
-          <name>GNU General Public License, Version 3</name>
-          <url>https://www.gnu.org/licenses/</url>
-      </license>
-  </licenses>
-  
-  <developers>
-      <developer>
-         <id>jay</id>
-         <name>Joerg Dippel</name>
-         <email>chess383@jdippel.de</email>
-         <roles>
-             <role>leadership in definitions and design of fundamental concepts</role>
-             <role>developer</role>
-         </roles>
-         <timezone>Europe/Berlin</timezone>
-      </developer>
-  </developers>
-  
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- This plugin can be invoked by calling from the command line, just call
+                    mvn org.pitest:pitest-maven:mutationCoverage -->
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>${pitest-maven.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>${pitest-junit5-plugin.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <targetClasses>
+                        <param>chess383.graph*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>chess383.graph*</param>
+                    </targetTests>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>mutationCoverage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <!-- This plugin can be invoked by calling the test phase of the build lifecycle, just call
+                   mvn test -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <!-- updated version is required by versions-maven-plugin -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${maven-install-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <!-- updated version is required by versions-maven-plugin -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub PIUG Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/PIUGroup/${project.artifactId}</url>
+        </repository>
+    </distributionManagement>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <!-- This plugin would generate the project info reports, just call
+                     mvn site -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven-project-info-reports-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <!-- This plugin is used to check the plugin updates, just call
+                     mvn versions:display-plugin-updates -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License, Version 3</name>
+            <url>https://www.gnu.org/licenses/</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>jay</id>
+            <name>Joerg Dippel</name>
+            <email>chess383@jdippel.de</email>
+            <roles>
+                <role>leadership in definitions and design of fundamental concepts</role>
+                <role>developer</role>
+            </roles>
+            <timezone>Europe/Berlin</timezone>
+        </developer>
+    </developers>
+
 </project>
