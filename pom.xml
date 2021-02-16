@@ -43,8 +43,8 @@
     <repositories>
         <repository>
             <id>github</id>
-            <name>GitHub PIUG Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/PIUGroup/</url>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
         </repository>
     </repositories>
 
