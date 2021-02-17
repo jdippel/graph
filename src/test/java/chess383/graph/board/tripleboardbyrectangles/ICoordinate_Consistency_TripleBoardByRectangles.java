@@ -34,11 +34,13 @@ import chess383.graph.board.ICoordinate_Consistency_Wrapper;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   January 2021
+ * @version   February 2021
  *
  */
 @DisplayName("the public method Set<List<String>> getLineBundles() for class ICoordinate_Consistency_TripleBoardByRectangles is tested")
-public class ICoordinate_Consistency_TripleBoardByRectangles extends ICoordinate_Consistency_Wrapper { 
+public class ICoordinate_Consistency_TripleBoardByRectangles { 
+
+    private ICoordinate_Consistency_Wrapper wrapper = new ICoordinate_Consistency_Wrapper( ICoordinateFactory.TRIPLE );
     
     @ParameterizedTest( name = "given a triple board from location {0} someone can move to: {1}, {2} or {3}")
     @DisplayName("given a location then following locations can be reached in an area of distance two")
@@ -139,7 +141,7 @@ public class ICoordinate_Consistency_TripleBoardByRectangles extends ICoordinate
                  "l8, j8 k8 l6 l7, j6 k7, j7 k6",                  
                  "l9, j9 k9 l10 l11 l5 l6, j11 j6 k10 k5, j10 j5 k11 k6" })
     void test( String location, String expectedRooks, String expectedBishops, String expectedKnights ) {
-        givenALocation_verifyTheLocationsForVariousTransformations( ICoordinateFactory.TRIPLE.get(), location, expectedRooks, expectedBishops, expectedKnights );
+        wrapper.givenALocation_verifyTheLocationsForVariousTransformations( location, expectedRooks, expectedBishops, expectedKnights );
     }
 }
 

@@ -2,7 +2,7 @@
  *  StandardBoard.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2015-2020 Jörg Dippel
+ *  Copyright (C) 2015-2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,13 +30,21 @@ import chess383.graph.line.LineOfLocations;
  * Provides locations on a bundle of lines for a standard board.
  *
  * @author    Jörg Dippel
- * @version   August 2020
+ * @version   February 2021
  *
  */
 public class StandardBoard extends LineBundle {
         
-    public StandardBoard( ) {
-        bundle = create( );
+    static public StandardBoard singleton = new StandardBoard() ; 
+    static public StandardBoard getInstance( ) { return singleton; }
+    
+    @Override
+    List<LineOfLocations> getBundle() { return singleton.bundle; }
+    
+    
+    private List<LineOfLocations> bundle;   
+        private StandardBoard( ) {
+        this.bundle = create( );
     }
 
     /** ------------------------------------------------------- */

@@ -2,7 +2,7 @@
  *  LineBundle.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2015-2020 Jörg Dippel
+ *  Copyright (C) 2015-2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -40,18 +40,18 @@ import chess383.graph.line.UndirectedRowsLine;
  * A bundle of lines through a given location is a set of lines which contain the location each.
  *
  * @author    Jörg Dippel
- * @version   August 2020
+ * @version   February 2021
  *
  */
 public abstract class LineBundle implements ICoordinate {
    
     /** ---------  Attributes  -------------------------------- */
     
-    List<LineOfLocations> bundle; 
+    // List<LineOfLocations> bundle; 
   
     /** ---------  Getter and Setter  ------------------------- */
 
-    List<LineOfLocations> getBundle( )   { return( this.bundle ); }
+	abstract List<LineOfLocations> getBundle( );
     
     /** ------------------------------------------------------- */
     

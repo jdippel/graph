@@ -2,7 +2,7 @@
  *  ThreeDimensionalBoard.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2016 - 2020 Jörg Dippel
+ *  Copyright (C) 2016 - 2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,12 +30,20 @@ import chess383.graph.line.LineOfLocations;
  * Please have a look to the descriptions of rules, search for rules by Jens Meder ...
  *
  * @author    Jörg Dippel
- * @version   August 2020
+ * @version   February 2021
  *
  */
 public class ThreeDimensionalBoard extends LineBundle {
     
-    public ThreeDimensionalBoard( ) {
+	static public ThreeDimensionalBoard singleton = new ThreeDimensionalBoard() ; 
+	static public ThreeDimensionalBoard getInstance( ) { return singleton; }
+	
+	@Override
+	List<LineOfLocations> getBundle() { return singleton.bundle; }
+
+    
+    private List<LineOfLocations> bundle; 
+    private ThreeDimensionalBoard( ) {
         bundle = create( );
     }
 

@@ -2,7 +2,7 @@
  *  ICoordinate_GetLineBundles_Rook_RedWhite_TripleBoardByRectangles.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2017 - 2019 Jörg Dippel
+ *  Copyright (C) 2017 - 2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,9 +33,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import chess383.ColorEnum;
 import chess383.ICoordinate;
+import chess383.ICoordinateFactory;
 import chess383.graph.adjacency.AdjacencyEnum;
 import chess383.graph.board.ICoordinate_GetLineBundles_Wrapper;
-import chess383.graph.board.TripleBoardByRectangles;
 import chess383.graph.direction.Direction;
 
 /**
@@ -44,13 +44,13 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   February 2021
  *
  */
 @DisplayName("the public method Set<List<String>> getLineBundles() for class ICoordinate_GetLineBundles_Rook_RedWhite_TripleBoardByRectangles is tested")
 public class ICoordinate_GetLineBundles_Rook_RedWhite_TripleBoardByRectangles extends ICoordinate_GetLineBundles_Wrapper { 
 
-    final static ICoordinate   BOARD =     new TripleBoardByRectangles( );
+    final static ICoordinate   BOARD =     ICoordinateFactory.TRIPLE.get( );
     final static Direction     DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.RED, ColorEnum.WHITE );
     final static AdjacencyEnum ADJACENCY = AdjacencyEnum.BY_EDGE;
     

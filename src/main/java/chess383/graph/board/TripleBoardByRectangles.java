@@ -2,7 +2,7 @@
  *  TripleBoardByRectangles.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2015 - 2020 Jörg Dippel
+ *  Copyright (C) 2015 - 2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,12 +31,20 @@ import chess383.graph.line.LineOfLocations;
  * Provides locations on a bundle of lines for a board for three players: rectangles within a hexagon.
  *
  * @author    Jörg Dippel
- * @version   August 2020
+ * @version   February 2021
  *
  */
 public class TripleBoardByRectangles extends LineBundle {
 
-    public TripleBoardByRectangles( ) {
+	static public TripleBoardByRectangles singleton = new TripleBoardByRectangles() ; 
+	static public TripleBoardByRectangles getInstance( ) { return singleton; }
+	
+	@Override
+	List<LineOfLocations> getBundle() { return singleton.bundle; }
+	
+	
+	private List<LineOfLocations> bundle;
+	private TripleBoardByRectangles( ) {
         bundle = create( );
     }
 
