@@ -6,7 +6,7 @@
   <groupId>de.chess383</groupId>
   <artifactId>graph</artifactId>
   <!-- version 5.5.0 == 5.4.5 -->
-  <version>5.5.1</version>
+  <version>5.5.2</version>
   <packaging>jar</packaging>
   <description>chess board architecture</description>
     
@@ -17,10 +17,10 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
         
         <chess383.chessexception.version>1.2.0</chess383.chessexception.version>
-        <junit-jupiter-api.version>5.7.0</junit-jupiter-api.version>
-        <junit-jupiter-engine.version>5.7.0</junit-jupiter-engine.version>
-        <junit-jupiter-params.version>5.7.0</junit-jupiter-params.version>
-        <assertj-core.version>3.18.1</assertj-core.version>
+        <junit-jupiter-api.version>5.8.0-M1</junit-jupiter-api.version>
+        <junit-jupiter-engine.version>5.8.0-M1</junit-jupiter-engine.version>
+        <junit-jupiter-params.version>5.8.0-M1</junit-jupiter-params.version>
+        <assertj-core.version>3.19.0</assertj-core.version>
         
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
