@@ -2,7 +2,7 @@
  *  KnightsLine_HashCode.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020, 2021 Jörg Dippel
  *
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   February 2021
  *
  */
 @DisplayName("the public method int hashCode( ) for class KnightsLine is tested")
@@ -56,6 +56,22 @@ public class KnightsLine_HashCode {
         assertThat( KnightsLine.createLine( LOCATIONS ).hashCode( ) )
                   .as( "hash code for meaningfully equivalent instances should match" )
                   .isEqualTo( HASH_CODE );
+    }
+    
+    @Test
+    @DisplayName("hashCode(): avoid simple constant assignment")
+    public void avoidSimpleConstantAssignement( ) {
+
+        int lineLengthTwo =   KnightsLine.createLine( "h8 g6" ).hashCode();
+        int lineLengthThree = KnightsLine.createLine( "d3 e5 f7" ).hashCode();
+        int lineLengthFour =  KnightsLine.createLine( "c3 d1 e3 f1" ).hashCode();
+        
+        assertThat( lineLengthTwo != lineLengthThree || lineLengthThree != lineLengthFour || lineLengthTwo != lineLengthFour )
+                  .as( "different lines should have different hash codes" )
+                  .isTrue();
+        assertThat( lineLengthTwo != 0 || lineLengthThree != 0 || lineLengthFour != 0 )
+                  .as( "different lines should have different hash codes" )
+                  .isTrue();
     }
 }
 

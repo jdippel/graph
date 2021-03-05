@@ -51,38 +51,38 @@ public abstract class LineBundle implements ICoordinate {
   
     /** ---------  Getter and Setter  ------------------------- */
 
-	abstract List<LineOfLocations> getBundle( );
+    abstract List<LineOfLocations> getBundle( );
     
     /** ------------------------------------------------------- */
     
-    LineOfLocations createRankLine( String locations ) {
+    static LineOfLocations createRankLine( String locations ) {
         
         return( UndirectedRowsLine.createLine( locations ) );
     }
     
-    LineOfLocations createFileLine( String locations, Direction direction ) {
+    static LineOfLocations createFileLine( String locations, Direction direction ) {
         
         return( DirectedFilesLine.createLine( direction, locations ) );
     }
     
-    LineOfLocations createFileLine( String locations ) {
+    static LineOfLocations createFileLine( String locations ) {
         
         final Direction direction = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
         return( createFileLine( locations, direction ) );
     }
     
-    LineOfLocations createDiagonalLine( String locations, Direction direction ) {
+    static LineOfLocations createDiagonalLine( String locations, Direction direction ) {
         
         return( DirectedDiagonalLine.createLine( direction, locations ) );
     }
     
-    LineOfLocations createDiagonalLine( String locations ) {
+    static LineOfLocations createDiagonalLine( String locations ) {
         
         final Direction direction = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
         return( createDiagonalLine( locations, direction ) );
     }
 
-    LineOfLocations createKnightLine( String value ) {
+    static LineOfLocations createKnightLine( String value ) {
     
         return( KnightsLine.createLine( value ) );
     }
@@ -171,11 +171,9 @@ public abstract class LineBundle implements ICoordinate {
          List<LineOfLocations> lineBundles = getBundle( );
          for( LineOfLocations line : lineBundles ) {
               String currentLine = line.getLocations( );
-              String[] tokens = currentLine.split( "\\s+" );
+              String[] tokens = currentLine.split( "\\s+", 0 );
               for( String location : tokens ) {
-                  if( location.length( ) > 0 ) {
-                      result.add( location );
-                  }
+                  result.add( location );
               }
          }
             

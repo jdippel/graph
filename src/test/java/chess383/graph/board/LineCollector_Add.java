@@ -2,7 +2,7 @@
  *  LineCollector_Add.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020, 2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   February 2021
  *
  */
 @DisplayName("the public method boolean add() for class LineCollector is tested")
@@ -68,8 +68,8 @@ public class LineCollector_Add {
         final List<String> ELEMENT = Arrays.asList( "apple", "banana" );
         
         LineCollector akkumulator = new LineCollector();
-        akkumulator.add( ELEMENT );
         
+        assertThat( akkumulator.add( ELEMENT ) ).as( "adding a vaild element should be confirmed" ).isTrue();
         assertThat( akkumulator.getAccumulator().remove( ELEMENT ) ).as( "an added element could also be removed" ).isTrue();
         assertThat( akkumulator.getAccumulator() ).as( "removing all elements then the collection is empty" ).isEmpty();
     }
@@ -86,6 +86,18 @@ public class LineCollector_Add {
         
         assertThat( akkumulator.getAccumulator().add( ELEMENT ) ).as( "an already added element could not be added again" ).isFalse();
         assertThat( akkumulator.getAccumulator().remove( ELEMENT ) ).as( "an added element could also be removed" ).isTrue();
+        assertThat( akkumulator.getAccumulator() ).as( "removing all elements then the collection is empty" ).isEmpty();
+    }
+    
+    @Test
+    @DisplayName("add: single element")
+    public void add_collectionnIsASingleSet() {
+        
+        final List<String> ELEMENT = Arrays.asList( "apple" );
+        
+        LineCollector akkumulator = new LineCollector();
+
+        assertThat( akkumulator.add( ELEMENT ) ).as( "attempt for adding a single element should be refused" ).isFalse();
         assertThat( akkumulator.getAccumulator() ).as( "removing all elements then the collection is empty" ).isEmpty();
     }
 }

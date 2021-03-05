@@ -2,7 +2,7 @@
  *  LineCollector.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020, 2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ import java.util.Set;
  * Collects lines for a bundle of lines.
  *
  * @author    Jörg Dippel
- * @version   August 2020
+ * @version   February 2021
  *
  */
 public class LineCollector {
@@ -53,10 +53,8 @@ public class LineCollector {
  
     // size must be at least of size 2, because one element is the origin and the other elements are possible targets
     public boolean add( List<String> filteredLine ) {
-        if( filteredLine.size( ) > 1 ) {
-            return( this.accumulator.add( filteredLine ) );
-        }
-        return false;
+    	
+        return ( filteredLine.size( ) > 1 ) && ( this.accumulator.add( filteredLine ) );
     }
 }
 

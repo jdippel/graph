@@ -6,7 +6,7 @@
   <groupId>de.chess383</groupId>
   <artifactId>graph</artifactId>
   <!-- version 5.5.0 == 5.4.5 -->
-  <version>5.5.2</version>
+  <version>5.5.31</version>
   <packaging>jar</packaging>
   <description>chess board architecture</description>
     
@@ -128,6 +128,9 @@
                <targetTests>
                  <param>chess383.graph*</param>
                </targetTests>
+               <excludedMethods>
+                   minimum
+               </excludedMethods>
              </configuration>
           </plugin>
           <plugin>

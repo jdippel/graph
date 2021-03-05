@@ -2,7 +2,7 @@
  *  DirectedDiagonalLine_HashCode.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020, 2021 Jörg Dippel
  *
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -34,7 +34,7 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   February 2021
  *
  */
 @DisplayName("the public method int hashCode( ) for class DirectedDiagonalLine is tested")
@@ -67,9 +67,25 @@ public class DirectedDiagonalLine_HashCode {
     @DisplayName("hashCode(): should differ for unidirectional instances of DirectedDiagonalLine when locations are reversed")
     public void unidirectionalInstanceReversedShouldDiffer( ) {
 
-        assertThat( DirectedFilesLine.createLine( Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK ), LOCATIONS ).hashCode( ) )
+        assertThat( DirectedDiagonalLine.createLine( Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK ), LOCATIONS ).hashCode( ) )
                   .as( "hash code for meaningfully equivalent instances should match" )
                   .isNotEqualTo( DirectedFilesLine.createLine( DIRECTION, LOCATIONS ).hashCode( ) );
+    }
+    
+    @Test
+    @DisplayName("hashCode(): avoid simple constant assignment")
+    public void avoidSimpleConstantAssignement( ) {
+
+        int lineLengthTwo =   DirectedDiagonalLine.createLine( Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK ), "b2 c3" ).hashCode();
+        int lineLengthThree = DirectedDiagonalLine.createLine( Direction.createUnidirectionalDirection( ColorEnum.BLACK, ColorEnum.WHITE ), "d4 c5 b6" ).hashCode();
+        int lineLengthFour =  DirectedDiagonalLine.createLine( Direction.createBidirectionalDirection(), "e7 f6 g5 h4" ).hashCode();
+        
+        assertThat( lineLengthTwo != lineLengthThree || lineLengthThree != lineLengthFour || lineLengthTwo != lineLengthFour )
+                  .as( "different lines should have different hash codes" )
+                  .isTrue();
+        assertThat( lineLengthTwo != 0 || lineLengthThree != 0 || lineLengthFour != 0 )
+                  .as( "different lines should have different hash codes" )
+                  .isTrue();
     }
 }
 
