@@ -2,7 +2,7 @@
  *  LineBundleMigration_Compare_List_List.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019, 2020 Jörg Dippel
+ *  Copyright (C) 2019 - 2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   August 2020
+ * @version   March 2021
  *
  */
 @DisplayName("the public static method boolean compare() for class LineBundleMigration with two parameters List<String> and List<String> is tested")
@@ -131,8 +131,8 @@ public class LineBundleMigration_Compare_List_List {
     @DisplayName("compare(): should return a difference if a list is shorter")
     public void compare_shouldReturnFalse_ForListsIfOneListIsShorter( ) {
         
-        List<String> firstList = Arrays.asList( "e4 e5 e6" );
-        List<String> secondList = Arrays.asList( "e4 e5" );
+        List<String> firstList = Arrays.asList( "e4 e5", "e6" );
+        List<String> secondList = Arrays.asList( "e4 e5 e6" );
 
         assertThat( LineBundleMigration.compare( firstList, secondList ) ).as( explanation ).isFalse();
     }

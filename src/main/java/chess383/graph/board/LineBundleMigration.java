@@ -31,7 +31,7 @@ import java.util.Set;
  * Provides static migration or conversion methods between types.
  *
  * @author    Jörg Dippel
- * @version   February 2021
+ * @version   March 2021
  */
 public class LineBundleMigration {
 
@@ -156,23 +156,16 @@ public class LineBundleMigration {
     
     public static boolean compare( String simpleString, List<String> listOfStrings ) {
         
-        if ( simpleString.contains( "," ) ) {
-            return compare( simpleString, listOfStrings, getSetSeparator() ); 
-        }
-        else {
-            return compare( simpleString, listOfStrings, "\\s+" ); 
-        }
+        return compare( simpleString, listOfStrings, simpleString.contains( "," ) ? getSetSeparator() : "\\s+" ); 
     }
     
     public static boolean compare( String simpleString, List<String> listOfStrings, String separator ) {
         
         if ( simpleString.trim().length() == 0 && listOfStrings.isEmpty() ) return true;
-        
-        String[] bulldozedTokens = simpleString.split( separator, 0 );
-        
-        if ( bulldozedTokens.length == 0 || ( bulldozedTokens.length == 1 && bulldozedTokens[ 0 ].length() == 0 ) ) return false;
+        if ( simpleString.trim().length() == 0 ) return false;
         if ( listOfStrings.isEmpty() ) return false;
         
+        String[] bulldozedTokens = simpleString.split( separator, 0 );
         Iterator<String> iterator = listOfStrings.iterator();
         while ( iterator.hasNext() ) {
             String stringWithinList = iterator.next();
@@ -202,18 +195,8 @@ public class LineBundleMigration {
         
         Iterator<String> firstIterator = firstListOfStrings.iterator();
         Iterator<String> secondIterator = secondListOfStrings.iterator();
-        while ( firstIterator.hasNext() ) {
-            if (secondIterator.hasNext() ) {
-                if ( firstIterator.next().equals( secondIterator.next() ) ) {
-                    // continue
-                }
-                else {
-                    return false;
-                }
-            }
-            else {
-                return false;
-            }
+        while ( firstIterator.hasNext() && secondIterator.hasNext() ) {
+            if ( firstIterator.next().compareTo( secondIterator.next() ) != 0 ) return false;
         }
         return true;
     }

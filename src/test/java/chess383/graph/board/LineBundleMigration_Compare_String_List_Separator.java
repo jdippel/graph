@@ -2,7 +2,7 @@
  *  LineBundleMigration_Compare_String_List_Separator.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019, 2020 Jörg Dippel
+ *  Copyright (C) 2019 - 2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   August 2020
+ * @version   March 2021
  *
  */
 @DisplayName("the public static method boolean compare() for class LineBundleMigration with three parameters String, List<String> and String is tested")
@@ -49,10 +49,21 @@ public class LineBundleMigration_Compare_String_List_Separator {
     public void compare_shouldReturnTrue_ForIdenticalLists_FilledList( ) {
         
         List<String> list = Arrays.asList( "e4 e5", "e7 e8" );
-        String separator = " t ";
+        String separator = " , ";
         String flattenedString = "e4 e5" + separator + "e7 e8";
 
         assertThat( LineBundleMigration.compare( flattenedString, list, separator ) ).as( explanation ).isTrue();
+    }
+    
+    @Test
+    @DisplayName("compare(): should deny equality if the order and the list elements are not equal")
+    public void compare_shouldReturnFalse_ForDifferentLists_FilledList( ) {
+        
+        List<String> list = Arrays.asList( "e4 e5", "e7 e6" );
+        String separator = " , ";
+        String flattenedString = "e4 e5" + separator + "e7 e8";
+
+        assertThat( LineBundleMigration.compare( flattenedString, list, separator ) ).as( explanation ).isFalse();
     }
     
     @Test

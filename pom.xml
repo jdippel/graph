@@ -6,7 +6,7 @@
   <groupId>de.chess383</groupId>
   <artifactId>graph</artifactId>
   <!-- version 5.5.0 == 5.4.5 -->
-  <version>5.5.31</version>
+  <version>5.5.37</version>
   <packaging>jar</packaging>
   <description>chess board architecture</description>
     
