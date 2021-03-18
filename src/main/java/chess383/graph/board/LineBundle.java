@@ -20,9 +20,15 @@
 
 package chess383.graph.board;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import chess383.ColorEnum;
 import chess383.ICoordinate;
@@ -40,15 +46,11 @@ import chess383.graph.line.UndirectedRowsLine;
  * A bundle of lines through a given location is a set of lines which contain the location each.
  *
  * @author    Jörg Dippel
- * @version   February 2021
+ * @version   March 2021
  *
  */
 public abstract class LineBundle implements ICoordinate {
-   
-    /** ---------  Attributes  -------------------------------- */
-    
-    // List<LineOfLocations> bundle; 
-  
+
     /** ---------  Getter and Setter  ------------------------- */
 
     abstract List<LineOfLocations> getBundle( );
@@ -87,97 +89,72 @@ public abstract class LineBundle implements ICoordinate {
         return( KnightsLine.createLine( value ) );
     }
     
-    private List<String> convertStringToListOfStrings( String list ) {
-
-        return LineBundleMigration.convertToList(list);
-    }
-    
     /** ------------------------------------------------------- */
     
     public Set<List<String>> getLineBundles( String location ) {
-        
-        Set<List<String>> result = new HashSet<List<String>>( );
-        
-        List<LineOfLocations> lineBundles = getBundle( );
-        for( LineOfLocations line : lineBundles ) {
-            if( line.contains( location ) ) {
-                
-                result.add( convertStringToListOfStrings( line.getLocations( ) ) );
-            }
-        }
     
-        return( result );
+        return getBundle( ).stream()
+                           .filter( line -> line.contains( location ) )
+                           .map( line -> Arrays.asList( line.getLocations().split( "//s+", 0 ) ) )
+                           .collect( Collectors.toSet() );
     }
         
+    private Predicate<List<String>> lineContainsTargetLocations = line -> line.size() > 1;
+    private BiPredicate<LineOfLocations, String> lineContainsSourceLocation = ( line, location ) -> line.contains( location );
+    private BiPredicate<LineOfLocations, AdjacencyEnum> lineMatchesAdjacency = ( line, adjacency ) -> line.matchesAdjacency( adjacency );
+    private BiPredicate<LineOfLocations, Direction> lineIsUndirected = ( line, orientation ) -> orientation == null || ( !orientation.isDirected() && !line.getDirection().isDirected() );
+    private BiPredicate<LineOfLocations, Direction> lineIsDirectedInGivenDirection = ( line, orientation ) -> orientation != null && orientation.isDirected() && line.getDirection( ).equals( orientation );
+    private BiPredicate<LineOfLocations, Direction> lineIsDirectedInReverseDirection = ( line, orientation ) -> orientation != null && orientation.isDirected() && line.getDirection( ).equals( Direction.createReversedDirection( orientation ) );
+    
     public Set<List<String>> getLineBundles( String location, Direction orientation ) {
 
         if( orientation == null ) return( getLineBundles( location ) );
         
-        LineCollector result = new LineCollector();
-        List<LineOfLocations> lineBundles = getBundle( );
-        for( LineOfLocations line : lineBundles ) {
-            if( line.contains( location ) ) {
-            
-                 if( !orientation.isDirected() && !line.getDirection().isDirected()  ) {
-                     result.add( LineBundleMigration.extractListForGivenDirection( line.getLocations( ), location ) );
-                     result.add( LineBundleMigration.extractListForReversedDirection( line.getLocations( ), location ) );
-                 }
-                 else {
-                     if( line.getDirection( ).equals( orientation ) ) {
-                         result.add( LineBundleMigration.extractListForGivenDirection( line.getLocations( ), location ) );
-                     }
-                     else if( line.getDirection( ).equals( Direction.createReversedDirection( orientation ) ) ) {
-                         result.add( LineBundleMigration.extractListForReversedDirection( line.getLocations( ), location ) );
-                     }
-                 }
-            }
-        }
-    
-        return( result.getAccumulator() );
+        return Stream.of(
+               getBundle().stream().filter( line -> lineContainsSourceLocation.test( line , location ) && lineIsUndirected.test( line, orientation ) )
+                                   .map( line -> LineBundleMigration.extractListForGivenDirection( line.getLocations( ), location ) )
+                                   .filter( lineContainsTargetLocations ),
+               getBundle().stream().filter( line -> lineContainsSourceLocation.test( line , location ) && lineIsUndirected.test( line, orientation ) )
+                                   .map( line -> LineBundleMigration.extractListForReversedDirection( line.getLocations( ), location ) )
+                                   .filter( lineContainsTargetLocations ),
+               getBundle().stream().filter( line -> lineContainsSourceLocation.test( line , location ) && lineIsDirectedInGivenDirection.test( line, orientation ) )
+                                   .map( line -> LineBundleMigration.extractListForGivenDirection( line.getLocations( ), location ) )
+                                   .filter( lineContainsTargetLocations ),
+               getBundle().stream().filter( line -> lineContainsSourceLocation.test( line , location ) && lineIsDirectedInReverseDirection.test( line, orientation ) )
+                                   .map( line -> LineBundleMigration.extractListForReversedDirection( line.getLocations( ), location ) )
+                                   .filter( lineContainsTargetLocations ) )
+                     .flatMap( id -> id )
+                     .collect( Collectors.toSet() );
     }
-    
+   
     public Set<List<String>> getLineBundles( String location, Direction orientation, AdjacencyEnum adjacency ) {
 
         if( adjacency == null ) return( getLineBundles( location, orientation ) );
 
-        LineCollector result = new LineCollector();        
-        List<LineOfLocations> lineBundles = getBundle( );
-        for( LineOfLocations line : lineBundles ) {
-            if( line.contains( location ) && line.matchesAdjacency( adjacency ) ) {
-                
-                if( orientation == null || ( !orientation.isDirected() && !line.getDirection().isDirected() )  ) {
-                    
-                    result.add( LineBundleMigration.extractListForGivenDirection( line.getLocations( ), location ) );
-                    result.add( LineBundleMigration.extractListForReversedDirection( line.getLocations( ), location ) );
-                }
-                else {
-                    if( line.getDirection( ).equals( orientation ) ) {
-                        result.add( LineBundleMigration.extractListForGivenDirection( line.getLocations( ), location ) );
-                    }
-                    else if( line.getDirection( ).equals( Direction.createReversedDirection( orientation ) ) ) {
-                        result.add( LineBundleMigration.extractListForReversedDirection( line.getLocations( ), location ) );
-                    }
-                }
-            }   
-        }
-    
-        return( result.getAccumulator() );
+        return Stream.of(
+                getBundle().stream().filter( line -> lineContainsSourceLocation.test( line , location ) && lineMatchesAdjacency.test( line, adjacency ) && lineIsUndirected.test( line, orientation ) )
+                                    .map( line -> LineBundleMigration.extractListForGivenDirection( line.getLocations( ), location ) )
+                                    .filter( lineContainsTargetLocations ),
+                getBundle().stream().filter( line -> lineContainsSourceLocation.test( line , location ) && lineMatchesAdjacency.test( line, adjacency ) && lineIsUndirected.test( line, orientation ) )
+                                    .map( line -> LineBundleMigration.extractListForReversedDirection( line.getLocations( ), location ) )
+                                    .filter( lineContainsTargetLocations ),
+                getBundle().stream().filter( line -> lineContainsSourceLocation.test( line , location ) && lineMatchesAdjacency.test( line, adjacency ) && lineIsDirectedInGivenDirection.test( line, orientation ) )
+                                    .map( line -> LineBundleMigration.extractListForGivenDirection( line.getLocations( ), location ) )
+                                    .filter( lineContainsTargetLocations ),
+                getBundle().stream().filter( line -> lineContainsSourceLocation.test( line , location ) && lineMatchesAdjacency.test( line, adjacency ) && lineIsDirectedInReverseDirection.test( line, orientation ) )
+                                    .map( line -> LineBundleMigration.extractListForReversedDirection( line.getLocations( ), location ) )
+                                    .filter( lineContainsTargetLocations ) )
+                      .flatMap( id -> id )
+                      .collect( Collectors.toSet() );
     }
 
     public Set<String> getAllLocations() {
+
+        Set<String> resultSet = new HashSet<String>();
         
-         Set<String> result = new HashSet<String>( );
-            
-         List<LineOfLocations> lineBundles = getBundle( );
-         for( LineOfLocations line : lineBundles ) {
-              String currentLine = line.getLocations( );
-              String[] tokens = currentLine.split( "\\s+", 0 );
-              for( String location : tokens ) {
-                  result.add( location );
-              }
-         }
-            
-         return( result );
+        Collections.addAll( resultSet, getBundle().stream().map( line -> line.getLocations() ).collect( Collectors.joining( " " )).split( "\\s+", 0 ) );
+        
+        return( resultSet );
     }
 }
 

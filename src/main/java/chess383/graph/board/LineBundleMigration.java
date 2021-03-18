@@ -82,6 +82,9 @@ public class LineBundleMigration {
         if( cursor == tokens.length ) {
             return( Collections.emptyList() );
         }
+        else if( cursor == 0 ) {
+            return( Collections.emptyList() );
+        }
         else {
             List<String> result = new ArrayList<String>( );
             while( cursor >= 0 ) {

@@ -2,7 +2,7 @@
  *  LineBundleMigration_ExtractListForReversedDirection.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2019 - 2021 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   March 2021
  */
 @DisplayName("the public static method List<String> extractListForReversedDirection() for class LineBundleMigration is tested")
 public class LineBundleMigration_ExtractListForReversedDirection { 
@@ -85,7 +85,7 @@ public class LineBundleMigration_ExtractListForReversedDirection {
         
         String examinedString = "e1 e2 e3 e4 e5 e6";
         String location = "e1";
-        List<String> expectedListOfStrings = new ArrayList<String>( Arrays.asList( new String[] { "e1" } ) );
+        List<String> expectedListOfStrings = new ArrayList<String>( );
 
         assertThat( LineBundleMigration.compare( expectedListOfStrings , LineBundleMigration.extractListForReversedDirection( examinedString, location ) ) ).as( explanation ).isTrue();
         assertThat( LineBundleMigration.extractListForReversedDirection( examinedString, location ) ).as( explanation ).isEqualTo( expectedListOfStrings );
