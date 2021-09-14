@@ -6,7 +6,7 @@
   <groupId>de.chess383</groupId>
   <artifactId>graph</artifactId>
   <!-- version 5.6.0 == 5.5.37 -->
-  <version>5.6.11</version>
+  <version>5.6.13</version>
   <packaging>jar</packaging>
   <description>chess board architecture</description>
     
@@ -17,16 +17,16 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
         
         <chess383.chessexception.version>1.2.0</chess383.chessexception.version>
-        <junit-jupiter-api.version>5.8.0-M1</junit-jupiter-api.version>
-        <junit-jupiter-engine.version>5.8.0-M1</junit-jupiter-engine.version>
-        <junit-jupiter-params.version>5.8.0-M1</junit-jupiter-params.version>
-        <assertj-core.version>3.19.0</assertj-core.version>
+        <junit-jupiter-api.version>5.8.0</junit-jupiter-api.version>
+        <junit-jupiter-engine.version>5.8.0</junit-jupiter-engine.version>
+        <junit-jupiter-params.version>5.8.0</junit-jupiter-params.version>
+        <assertj-core.version>3.20.2</assertj-core.version>
         
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
         <pitest-maven.version>1.6.3</pitest-maven.version>
-        <pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
+        <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
         <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
         <requireMavenVersion.version>3.2.5</requireMavenVersion.version>
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
@@ -35,6 +35,7 @@
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
+        <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
         
         <maven-project-info-reports-plugin.version>3.1.1</maven-project-info-reports-plugin.version>
         <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
@@ -194,6 +195,16 @@
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-install-plugin</artifactId>
              <version>${maven-install-plugin.version}</version>
+          </plugin>
+          <plugin>
+             <artifactId>maven-dependency-plugin</artifactId>
+             <version>${maven-dependency-plugin.version}</version>
+             <configuration>
+                <ignoredUnusedDeclaredDependencies>
+                   <ignoredUnusedDeclaredDependencies>de.chess383:chessexception</ignoredUnusedDeclaredDependencies>
+                   <ignoredUnusedDeclaredDependencies>org.junit.jupiter:junit-jupiter-engine</ignoredUnusedDeclaredDependencies>
+                </ignoredUnusedDeclaredDependencies>
+             </configuration>
           </plugin>
       </plugins>
   </build>
