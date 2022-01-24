@@ -27,10 +27,10 @@ import chess383.graph.board.TripleBoardByRectangles;
 /**
  * Provides locations on a bundle of lines.
  * 
- * A line is a ordered list of names.
+ * A line is an ordered list of names.
  *
  * @author    Jörg Dippel
- * @version   February 2021
+ * @version   January 2022
  *
  */
 public enum ICoordinateFactory {

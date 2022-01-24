@@ -2,7 +2,7 @@
  *  DirectedDiagonalLine_Equals.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020 -2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,21 +34,21 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 @DisplayName("the public method boolean equals( ) for class DirectedDiagonalLine is tested")
 public class DirectedDiagonalLine_Equals {
 
     private final Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
-    private final DirectedDiagonalLine EXPECTED_LINE = DirectedDiagonalLine.createLine( DIRECTION, "b4 c5 d6 e7" );
+    private final DirectedDiagonalLine EXPECTED_LINE = DirectedDiagonalLine.createLine( "b4 c5 d6 e7", DIRECTION );
     
     @Test
     @DisplayName("equals(): return value should be true when strings for DirectedDiagonalLine.createLine() are identical") 
     public void equals_shouldBeEqual_WhenStringsAreIdentical( ) {
 
         String inputLine = "b4 c5 d6 e7";
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, inputLine );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings should be equal" )
@@ -60,7 +60,7 @@ public class DirectedDiagonalLine_Equals {
     public void equals_shouldNotBeEqual_WhenLocationNamesAreMissingWithinLine( ) {
 
         String inputLine = "b4 c5    e7";
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, inputLine );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings must not be equal" )
@@ -72,7 +72,7 @@ public class DirectedDiagonalLine_Equals {
     public void equals_shouldBeEqual_WhenStringsAreSimilarButOnlyDifferingForWhiteSpaces( ) {
 
         String inputLine = " b4   c5 d6  e7 ";
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, inputLine );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings should be equal" )

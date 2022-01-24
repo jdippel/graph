@@ -42,7 +42,7 @@ public class DirectedDiagonalLine_HashCode {
 
     final String LOCATIONS = "  e5 d4    c3 b2   ";
     final Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.BLACK, ColorEnum.WHITE );
-    final DirectedDiagonalLine LINE = DirectedDiagonalLine.createLine( DIRECTION, LOCATIONS );
+    final DirectedDiagonalLine LINE = DirectedDiagonalLine.createLine( LOCATIONS, DIRECTION );
     final int HASH_CODE = LINE.hashCode();
 
     @Test
@@ -58,7 +58,7 @@ public class DirectedDiagonalLine_HashCode {
     @DisplayName("hashCode(): should be equal when instances of DirectedDiagonalLine are compared")
     public void meaningfullyEquivalentInstances( ) {
 
-        assertThat( DirectedDiagonalLine.createLine( DIRECTION, LOCATIONS ).hashCode( ) )
+        assertThat( DirectedDiagonalLine.createLine( LOCATIONS, DIRECTION ).hashCode( ) )
                   .as( "hash code for meaningfully equivalent instances should match" )
                   .isEqualTo( HASH_CODE );
     }
@@ -67,23 +67,23 @@ public class DirectedDiagonalLine_HashCode {
     @DisplayName("hashCode(): should differ for unidirectional instances of DirectedDiagonalLine when locations are reversed")
     public void unidirectionalInstanceReversedShouldDiffer( ) {
 
-        assertThat( DirectedDiagonalLine.createLine( Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK ), LOCATIONS ).hashCode( ) )
+        assertThat( DirectedDiagonalLine.createLine( LOCATIONS, Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK ) ).hashCode( ) )
                   .as( "hash code for meaningfully equivalent instances should match" )
-                  .isNotEqualTo( DirectedFilesLine.createLine( DIRECTION, LOCATIONS ).hashCode( ) );
+                  .isNotEqualTo( DirectedFilesLine.createLine( LOCATIONS, DIRECTION ).hashCode( ) );
     }
     
     @Test
     @DisplayName("hashCode(): avoid simple constant assignment")
     public void avoidSimpleConstantAssignement( ) {
 
-        int lineLengthTwo =   DirectedDiagonalLine.createLine( Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK ), "b2 c3" ).hashCode();
-        int lineLengthThree = DirectedDiagonalLine.createLine( Direction.createUnidirectionalDirection( ColorEnum.BLACK, ColorEnum.WHITE ), "d4 c5 b6" ).hashCode();
-        int lineLengthFour =  DirectedDiagonalLine.createLine( Direction.createBidirectionalDirection(), "e7 f6 g5 h4" ).hashCode();
+        int lineLengthTwo =   DirectedDiagonalLine.createLine( "b2 c3", Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK ) ).hashCode();
+        int lineLengthThree = DirectedDiagonalLine.createLine( "d4 c5 b6", Direction.createUnidirectionalDirection( ColorEnum.BLACK, ColorEnum.WHITE ) ).hashCode();
+        int lineLengthFour =  DirectedDiagonalLine.createLine( "e7 f6 g5 h4", Direction.createBidirectionalDirection() ).hashCode();
         
-        assertThat( lineLengthTwo != lineLengthThree || lineLengthThree != lineLengthFour || lineLengthTwo != lineLengthFour )
+        assertThat( lineLengthTwo != lineLengthThree && lineLengthThree != lineLengthFour && lineLengthTwo != lineLengthFour )
                   .as( "different lines should have different hash codes" )
                   .isTrue();
-        assertThat( lineLengthTwo != 0 || lineLengthThree != 0 || lineLengthFour != 0 )
+        assertThat( lineLengthTwo != 0 && lineLengthThree != 0 && lineLengthFour != 0 )
                   .as( "different lines should have different hash codes" )
                   .isTrue();
     }

@@ -58,9 +58,9 @@ public class LineOfLocations_CreateLine {
         String passedString = "g7 f6 e5 d4";
         String expectedString = "g7 f6 e5 d4";
 
-        assertThat( DirectedFilesLine.createLine( DIRECTION, passedString ) )
+        assertThat( DirectedFilesLine.createLine( passedString, DIRECTION ) )
                   .as( "should return instance of LineOfLocations" )
-                  .isEqualTo( DirectedFilesLine.createLine( DIRECTION, expectedString ));
+                  .isEqualTo( DirectedFilesLine.createLine( expectedString, DIRECTION ));
     }
     
     @Test
@@ -71,9 +71,9 @@ public class LineOfLocations_CreateLine {
         String passedString = "d4 e5 f6 g7";
         String expectedString = "d4 e5 f6 g7";
 
-        assertThat( DirectedFilesLine.createLine( DIRECTION, passedString ) )
+        assertThat( DirectedFilesLine.createLine( passedString, DIRECTION ) )
                   .as( "should return instance of LineOfLocations" )
-                  .isEqualTo( DirectedFilesLine.createLine( DIRECTION, expectedString ));
+                  .isEqualTo( DirectedFilesLine.createLine( expectedString, DIRECTION ));
     }
     
     @Test
@@ -90,27 +90,15 @@ public class LineOfLocations_CreateLine {
     
     @Test
     @DisplayName("createLine(): should return LineOfLocations with normalized reversed string when locations are defined")
-    public void createLine_shouldReturnLineOfLocationsWithNormalizedReversedString_WhenLocationsAreDefined( ) {
-
-        String passedString = " e8 e7  e6  e5 e4";
-        String expectedString = "e4 e5 e6 e7 e8";
-
-        assertThat( UndirectedRowsLine.createLine( passedString ) )
-                  .as( "should return instance of LineOfLocations" )
-                  .isEqualTo( UndirectedRowsLine.createLine( expectedString ));
-    }
-    
-    @Test
-    @DisplayName("createLine(): should return LineOfLocations with normalized reversed string when locations are defined")
     public void createLine_shouldReturnLineOfLocationsWithNormalizedString_WhenLocationsAreDefinedANDDirectioIsUnidirectional( ) {
         
         Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
         String passedString = " e8 e7  e6  e5 e4";
         String expectedString = "e8 e7 e6 e5 e4";
 
-        assertThat( DirectedFilesLine.createLine( DIRECTION, passedString ) )
+        assertThat( DirectedFilesLine.createLine( passedString, DIRECTION ) )
                   .as( "should return instance of LineOfLocations" )
-                  .isEqualTo( DirectedFilesLine.createLine( DIRECTION, expectedString ));
+                  .isEqualTo( DirectedFilesLine.createLine( expectedString, DIRECTION ));
     }
     
     @Test

@@ -2,7 +2,7 @@
  *  LineBundle_CreateLine.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2021 Jörg Dippel
+ *  Copyright (C) 2021, 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ import chess383.graph.line.UndirectedRowsLine;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2021
+ * @version   January 2022
  *
  */
 @DisplayName("the public static method LineOfLocations createLine() for class LineBundle is tested")
@@ -60,17 +60,6 @@ public class LineBundle_CreateLine {
         assertThat( receivedCreatedLine.getLocations() ).as( explanationForLocations ).isEqualTo( locations );
     }
     
-    @Test
-    @DisplayName("createRankLine(): should return equality if the order and the list elements each are equal")
-    public void createLine_shouldReturnCorrectDirectionAndLocations_ForCreateRankLine( ) {
-        
-        String locations = "e4 e5 e6";
-        LineOfLocations receivedCreatedLine = LineBundle.createRankLine( locations );
-
-        assertThat( receivedCreatedLine.getDirection() ).as( explanationForDirection ).isEqualTo(( Direction.createBidirectionalDirection() ) );
-        assertThat( receivedCreatedLine.getLocations() ).as( explanationForLocations ).isEqualTo( locations );
-    }
-    
     
     @Test
     @DisplayName("DirectedFilesLine.createLine(): should return equality if the order and the list elements each are equal")
@@ -78,31 +67,7 @@ public class LineBundle_CreateLine {
         
         Direction direction = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
         String locations = "e4 e5 e6";
-        LineOfLocations receivedCreatedLine = DirectedFilesLine.createLine( direction, locations );
-
-        assertThat( receivedCreatedLine.getDirection() ).as( explanationForDirection ).isEqualTo(( direction ) );
-        assertThat( receivedCreatedLine.getLocations() ).as( explanationForLocations ).isEqualTo( locations );
-    }
-    
-    @Test
-    @DisplayName("createFileLine(): should return equality if the order and the list elements each are equal")
-    public void createLine_shouldReturnCorrectDirectionAndLocations_ForCreateFileLineCalledWithTwoArguments( ) {
-        
-        Direction direction = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
-        String locations = "e4 e5 e6";
-        LineOfLocations receivedCreatedLine = LineBundle.createFileLine( locations, direction );
-
-        assertThat( receivedCreatedLine.getDirection() ).as( explanationForDirection ).isEqualTo(( direction ) );
-        assertThat( receivedCreatedLine.getLocations() ).as( explanationForLocations ).isEqualTo( locations );
-    }
-    
-    @Test
-    @DisplayName("createFileLine(): should return equality if the order and the list elements each are equal")
-    public void createLine_shouldReturnCorrectDirectionAndLocations_ForCreateFileLineCalledWithOneArgument( ) {
-        
-        Direction direction = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
-        String locations = "e4 e5 e6";
-        LineOfLocations receivedCreatedLine = LineBundle.createFileLine( locations );
+        LineOfLocations receivedCreatedLine = DirectedFilesLine.createLine( locations, direction );
 
         assertThat( receivedCreatedLine.getDirection() ).as( explanationForDirection ).isEqualTo(( direction ) );
         assertThat( receivedCreatedLine.getLocations() ).as( explanationForLocations ).isEqualTo( locations );
@@ -115,31 +80,7 @@ public class LineBundle_CreateLine {
         
         Direction direction = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
         String locations = "e4 f5 g6";
-        LineOfLocations receivedCreatedLine = DirectedDiagonalLine.createLine( direction, locations );
-
-        assertThat( receivedCreatedLine.getDirection() ).as( explanationForDirection ).isEqualTo(( direction ) );
-        assertThat( receivedCreatedLine.getLocations() ).as( explanationForLocations ).isEqualTo( locations );
-    }
-    
-    @Test
-    @DisplayName("createDiagonalLine(): should return equality if the order and the list elements each are equal")
-    public void createLine_shouldReturnCorrectDirectionAndLocations_ForCreateDiagonalLineWithTwoArguments( ) {
-        
-        Direction direction = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
-        String locations = "e4 f5 g6";
-        LineOfLocations receivedCreatedLine = LineBundle.createDiagonalLine( locations, direction );
-
-        assertThat( receivedCreatedLine.getDirection() ).as( explanationForDirection ).isEqualTo(( direction ) );
-        assertThat( receivedCreatedLine.getLocations() ).as( explanationForLocations ).isEqualTo( locations );
-    }
-    
-    @Test
-    @DisplayName("createDiagonalLine(): should return equality if the order and the list elements each are equal")
-    public void createLine_shouldReturnCorrectDirectionAndLocations_ForCreateDiagonalLineWithOneArgument( ) {
-        
-        Direction direction = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
-        String locations = "e4 f5 g6";
-        LineOfLocations receivedCreatedLine = LineBundle.createDiagonalLine( locations );
+        LineOfLocations receivedCreatedLine = DirectedDiagonalLine.createLine( locations, direction );
 
         assertThat( receivedCreatedLine.getDirection() ).as( explanationForDirection ).isEqualTo(( direction ) );
         assertThat( receivedCreatedLine.getLocations() ).as( explanationForLocations ).isEqualTo( locations );
@@ -153,18 +94,6 @@ public class LineBundle_CreateLine {
         Direction direction = Direction.createBidirectionalDirection();
         String locations = "e4 f3";
         LineOfLocations receivedCreatedLine = KnightsLine.createLine( locations );
-
-        assertThat( receivedCreatedLine.getDirection() ).as( explanationForDirection ).isEqualTo(( direction ) );
-        assertThat( receivedCreatedLine.getLocations() ).as( explanationForLocations ).isEqualTo( locations );
-    }
-    
-    @Test
-    @DisplayName("KnightsLine.createLine(): should return equality if the order and the list elements each are equal")
-    public void createLine_shouldReturnCorrectDirectionAndLocations_ForCreateKnightLine( ) {
-        
-        Direction direction = Direction.createBidirectionalDirection();
-        String locations = "e4 f3";
-        LineOfLocations receivedCreatedLine = LineBundle.createKnightLine( locations );
 
         assertThat( receivedCreatedLine.getDirection() ).as( explanationForDirection ).isEqualTo(( direction ) );
         assertThat( receivedCreatedLine.getLocations() ).as( explanationForLocations ).isEqualTo( locations );

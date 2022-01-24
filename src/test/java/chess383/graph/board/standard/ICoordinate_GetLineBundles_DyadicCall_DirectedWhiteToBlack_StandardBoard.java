@@ -2,7 +2,7 @@
  *  ICoordinate_GetLineBundles_DyadicCall_DirectedWhiteToBlack_StandardBoard.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2019 - 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   January 2022
  *
  */
 @DisplayName("the public method Set<List<String>> getLineBundles() for class ICoordinate_GetLineBundles_DyadicCall_DirectedWhiteToBlack_StandardBoard is tested")
@@ -52,12 +52,12 @@ public class ICoordinate_GetLineBundles_DyadicCall_DirectedWhiteToBlack_Standard
 
     final static ICoordinate   BOARD =     ICoordinateFactory.STANDARD.get( );
     final static Direction     DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
-    final static List<String>  EMPTY_LIST = new ArrayList<String>();
+    final static List<String>  EMPTY_LIST = new ArrayList<>();
     
     @ParameterizedTest( name = "given a standard board from location {0} there will be lines {1} to walk along" )
     @MethodSource("stringAndListProvider")
     public void testWithMultiArgMethodSource( String origin, List<String> expectedResultList ) {
-    	assertThat( compareLists( BOARD.getLineBundles( origin, DIRECTION ), expectedResultList ) ).as( describeOnError( origin ) ).isTrue();
+    	assertThat( compareCollections( BOARD.getLineBundles( origin, DIRECTION ), expectedResultList ) ).as( describeOnError( origin ) ).isTrue();
     }
 
     public static Stream<Arguments> stringAndListProvider() {
@@ -117,7 +117,7 @@ public class ICoordinate_GetLineBundles_DyadicCall_DirectedWhiteToBlack_Standard
             Arguments.of( "g4", Arrays.asList( "g4 g5 g6 g7 g8", "g4 h5", "g4 f5 e6 d7 c8" ) ),
             Arguments.of( "g5", Arrays.asList( "g5 g6 g7 g8", "g5 h6", "g5 f6 e7 d8" ) ),
             Arguments.of( "g6", Arrays.asList( "g6 g7 g8", "g6 h7", "g6 f7 e8" ) ),
-            Arguments.of( "g7", Arrays.asList( "g7 h8", "g7 h8", "g7 f8" ) ),
+            Arguments.of( "g7", Arrays.asList( "g7 h8", "g7 g8", "g7 f8" ) ),
             Arguments.of( "g8", EMPTY_LIST ),
             Arguments.of( "h1", Arrays.asList( "h1 h2 h3 h4 h5 h6 h7 h8", "h1 g2 f3 e4 d5 c6 b7 a8" ) ),
             Arguments.of( "h2", Arrays.asList( "h2 h3 h4 h5 h6 h7 h8", "h2 g3 f4 e5 d6 c7 b8" ) ),

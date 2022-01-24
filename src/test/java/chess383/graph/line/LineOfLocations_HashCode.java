@@ -2,7 +2,7 @@
  *  LineOfLocations_HashCode.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019, 2020 Jörg Dippel
+ *  Copyright (C) 2019 - 2022 Jörg Dippel
  *
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -34,7 +34,7 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 @DisplayName("the public method int hashCode( ) for class LineOfLocations is tested")
@@ -66,9 +66,9 @@ public class LineOfLocations_HashCode {
     @DisplayName("hashCode(): should differ for unidirectional instances of LineOfLocations when locations are reversed")
     public void unidirectionalInstanceReversedShouldDiffer( ) {
 
-        assertThat( DirectedFilesLine.createLine( Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK ), LOCATIONS ).hashCode( ) )
+        assertThat( DirectedFilesLine.createLine( LOCATIONS, Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK ) ).hashCode( ) )
                   .as( "hash code for meaningfully equivalent instances should match" )
-                  .isNotEqualTo( DirectedFilesLine.createLine( Direction.createUnidirectionalDirection( ColorEnum.BLACK, ColorEnum.WHITE ), LOCATIONS ).hashCode( ) );
+                  .isNotEqualTo( DirectedFilesLine.createLine( LOCATIONS, Direction.createUnidirectionalDirection( ColorEnum.BLACK, ColorEnum.WHITE ) ).hashCode( ) );
     }
 }
 

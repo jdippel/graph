@@ -2,7 +2,7 @@
  *  DirectedDiagonalLine_ToString.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020 -2022 Jörg Dippel
  *
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -34,7 +34,7 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 @DisplayName("the public method String toString( ) for class DirectedDiagonalLine is tested")
@@ -48,7 +48,7 @@ public class DirectedDiagonalLine_ToString {
     @DisplayName("toString(): should be equal for given definition of DirectedDiagonalLine example")
     public void sameStringDescription( ) {
 
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, LOCATIONS );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( LOCATIONS, DIRECTION );
         
         assertThat( discreteLine.toString( ) )
                   .as( "strings of toString() method must be formatted by trimming" )

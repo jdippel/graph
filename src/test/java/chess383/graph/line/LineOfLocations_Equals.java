@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 @DisplayName("the public method boolean equals( ) for class LineOfLocations is tested")
@@ -68,18 +68,6 @@ public class LineOfLocations_Equals {
     public void equals_shouldBeEqual_WhenStringsAreSimilarButOnlyDifferingForWhiteSpaces( ) {
 
         String inputLine = " b2 c2 d2  e2 ";
-        LineOfLocations discreteLine = UndirectedRowsLine.createLine( inputLine );
-        
-        assertThat( discreteLine.equals( EXPECTED_LINE ) )
-                  .as( "strings should be equal" )
-                  .isTrue();
-    }
-    
-    @Test
-    @DisplayName("equals(): return value should be true when strings for LineOfLocations.createLine() are reversed but differing for white spaces") 
-    public void equals_shouldBeEqual_WhenStringsAreReversedButDifferingForWhiteSpaces( ) {
-
-        String inputLine = "e2 d2  c2 b2";
         LineOfLocations discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )

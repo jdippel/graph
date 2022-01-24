@@ -2,7 +2,7 @@
  *  DirectedFilesLine_CreateLine.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020 - 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   July 2020
+ * @version   January 2022
  */
 @DisplayName("the public static method DirectedFilesLine_CreateLine createLine() for class DirectedFilesLine is tested")
 public class DirectedFilesLine_CreateLine { 
@@ -42,41 +42,54 @@ public class DirectedFilesLine_CreateLine {
     private final Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
     
     @Test
-    @DisplayName("createLine(): should return DirectedFilesLine when locations are defined as a file from black to white")
-    public void createLine_shouldReturnDirectedFilesLine_WhenLocationsAreDefinedAsAFileFromBlackToWhite( ) {
+    @DisplayName("createLine(): should return direction for DirectedFilesLine when locations are defined as a file from black to white")
+    public void createLine_shouldReturnDirectionForDirectedFilesLine_WhenLocationsAreDefinedAsAFileFromBlackToWhite( ) {
         
         Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.BLACK, ColorEnum.WHITE );
         String passedString = "b5 b4 b3 b2 b1";
         String expectedString = "b5 b4 b3 b2 b1";
 
-        assertThat( DirectedFilesLine.createLine( DIRECTION, passedString ) )
-                  .as( "should return instance of DirectedFilesLine" )
-                  .isEqualTo( DirectedFilesLine.createLine( DIRECTION, expectedString ));
+        assertThat( DirectedFilesLine.createLine( passedString, DIRECTION ).getDirection() )
+                  .as( "should return instance of DirectedFilesLine with related direction" )
+                  .isEqualTo( DIRECTION );
     }
     
     @Test
-    @DisplayName("createLine(): should return DirectedFilesLine with normalized reversed string when locations are defined")
-    public void createLine_shouldReturnDirectedFilesLineWithNormalizedString_WhenLocationsAreDefinedAndDirectionIsUnidirectional( ) {
+    @DisplayName("createLine(): should return locations for DirectedFilesLine when locations are defined as a file from white to black")
+    public void createLine_shouldReturnDLocationsForDirectedFilesLineWithNormalizedString_WhenLocationsAreDefinedFromWhiteToBlack( ) {
         
         Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
         String passedString = "e3 e3  e4  e5 e6 e7";
         String expectedString = "e3 e3 e4 e5 e6 e7";
 
-        assertThat( DirectedFilesLine.createLine( DIRECTION, passedString ) )
-                  .as( "should return instance of DirectedFilesLine" )
-                  .isEqualTo( DirectedFilesLine.createLine( DIRECTION, expectedString ));
+        assertThat( DirectedFilesLine.createLine( passedString, DIRECTION ).getLocations() )
+                  .as( "should return instance of DirectedFilesLine with related locations" )
+                  .isEqualTo( expectedString );
+    }
+
+    @Test
+    @DisplayName("createLine(): should return locations for DirectedFilesLine when locations are defined as a file")
+    public void createLine_shouldReturnLocationsForDirectedFilesLineWithNormalizedString_WhenLocationsAreDefined( ) {
+
+        Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
+        String passedString = "e3 e3  e4  e5 e6 e7";
+        String expectedString = "e3 e3 e4 e5 e6 e7";
+
+        assertThat( DirectedFilesLine.createLine( passedString ).getLocations() )
+                .as( "should return instance of DirectedFilesLine with related locations" )
+                .isEqualTo( expectedString );
     }
     
     @Test
-    @DisplayName("createLine(): should return DirectedFilesLine ignoring string when less than two names are offered")
-    public void createLine_shouldReturnDirectedFilesLineIgnoringString_WhenLessThanTwoNamesAreOffered( ) {
+    @DisplayName("createLine(): should return no locations for DirectedFilesLine when there are not at least two locations ")
+    public void createLine_shouldReturnEmptyLocationsForDirectedFilesLine_WhenLessThanTwoNamesAreOffered( ) {
 
-        String passedString = "e4 ";
+        String passedString = "e4 \t";
         String expectedString = "";
 
-        assertThat( DirectedFilesLine.createLine( DIRECTION, passedString ) )
+        assertThat( DirectedFilesLine.createLine( passedString, DIRECTION ).getLocations() )
                   .as( "should return instance of DirectedFilesLine" )
-                  .isEqualTo( DirectedFilesLine.createLine( DIRECTION, expectedString ));
+                  .isEqualTo( "" );
     } 
 }
 

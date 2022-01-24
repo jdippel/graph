@@ -41,14 +41,14 @@ import chess383.graph.direction.Direction;
 public class DirectedFilesLine_Equals {
 
     private final Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
-    private final DirectedFilesLine EXPECTED_LINE = DirectedFilesLine.createLine( DIRECTION, "b2 b3 b4 b5" );
+    private final DirectedFilesLine EXPECTED_LINE = DirectedFilesLine.createLine( "b2 b3 b4 b5", DIRECTION );
     
     @Test
     @DisplayName("equals(): return value should be true when strings for DirectedFilesLine.createLine() are identical") 
     public void equals_shouldBeEqual_WhenStringsAreIdentical( ) {
 
         String inputLine = "b2 b3 b4 b5";
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, inputLine );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings should be equal" )
@@ -60,7 +60,7 @@ public class DirectedFilesLine_Equals {
     public void equals_shouldNotBeEqual_WhenLocationNamesAreMissingWithinLine( ) {
 
         String inputLine = "b2 b3    b5";
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, inputLine );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings must not be equal" )
@@ -72,7 +72,7 @@ public class DirectedFilesLine_Equals {
     public void equals_shouldBeEqual_WhenStringsAreSimilarButOnlyDifferingForWhiteSpaces( ) {
 
         String inputLine = " b2 b3 b4  b5  ";
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, inputLine );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings should be equal" )
@@ -84,7 +84,7 @@ public class DirectedFilesLine_Equals {
     public void equals_shouldBeNotEqual_WhenStringsAreReversed( ) {
 
         String inputLine = "b5 b4 b3 b2";
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, inputLine );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings should not be equal" )

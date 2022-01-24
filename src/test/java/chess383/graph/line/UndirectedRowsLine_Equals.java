@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 @DisplayName("the public method boolean equals( ) for class UndirectedRowsLine is tested")
@@ -76,15 +76,15 @@ public class UndirectedRowsLine_Equals {
     }
     
     @Test
-    @DisplayName("equals(): return value should be true when strings for UndirectedRowsLine.createLine() are reversed but differing for white spaces") 
-    public void equals_shouldBeEqual_WhenStringsAreReversedButDifferingForWhiteSpaces( ) {
+    @DisplayName("equals(): return value should be false when strings for UndirectedRowsLine.createLine() are reversed but differing for white spaces")
+    public void equals_shouldNotBeEqual_WhenStringsAreReversedButDifferingForWhiteSpaces( ) {
 
         String inputLine = "e2 d2  c2 b2";
         UndirectedRowsLine discreteLine = UndirectedRowsLine.createLine( inputLine );
         
         assertThat( discreteLine.equals( EXPECTED_LINE ) )
                   .as( "strings should be equal" )
-                  .isTrue();
+                  .isFalse();
     }
 }
 

@@ -37,8 +37,8 @@ import org.junit.jupiter.api.Test;
 public class KnightsLine_CreateLine { 
  
     @Test
-    @DisplayName("createLine(): should return KnightsLine when locations are defined as a rank")
-    public void createLine_shouldReturnKnightsLine_WhenLocationsAreDefinedAsARank( ) {
+    @DisplayName("createLine(): should return KnightsLine when locations are defined")
+    public void createLine_shouldReturnKnightsLine_WhenLocationsAreDefined( ) {
         
         String passedString = "c3 d1 e3 f1";
 
@@ -48,15 +48,14 @@ public class KnightsLine_CreateLine {
     }
   
     @Test
-    @DisplayName("createLine(): should return KnightsLine with normalized string when locations are defined")
-    public void createLine_shouldReturnKnightsLineWithNormalizedString_WhenLocationsAreDefined( ) {
+    @DisplayName("createLine(): should return locations from KnightsLine with normalized string when locations are defined")
+    public void createLine_shouldReturnKLocationsFromKnightsLineWithNormalizedString_WhenLocationsAreDefined( ) {
         
-        String passedString = "c3 d1 e3 f1";
-        String expectedString = " c3  d1 e3 f1";
+        String passedString = " c3  d1 e3 f1";
 
-        assertThat( KnightsLine.createLine( passedString ) )
+        assertThat( KnightsLine.createLine( passedString ).getLocations() )
                   .as( "should return instance of KnightsLine" )
-                  .isEqualTo( KnightsLine.createLine( expectedString ));
+                  .isEqualTo( "c3 d1 e3 f1" );
     }
     
     @Test
@@ -66,9 +65,9 @@ public class KnightsLine_CreateLine {
         String passedString = "e4 ";
         String expectedString = "";
 
-        assertThat( KnightsLine.createLine( passedString ) )
+        assertThat( KnightsLine.createLine( passedString ).getLocations() )
                   .as( "should return instance of KnightsLine" )
-                  .isEqualTo( KnightsLine.createLine( expectedString ));
+                  .isEqualTo( "" );
     }
 }
 

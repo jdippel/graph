@@ -35,14 +35,14 @@ import org.junit.jupiter.params.provider.CsvSource;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 
 @DisplayName("the public method String getLocations( ) for class LineOfLocations is tested")
 public class LineOfLocations_GetLocations {
 
-    private final Direction DIRECTED = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
+    private final Direction DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
     
     @ParameterizedTest
     @CsvSource({
@@ -52,7 +52,7 @@ public class LineOfLocations_GetLocations {
     @DisplayName("getLocations(): should return a similar line of locations, but trimmed and normalized")
     void containsLocation( String inputLine, String expected ) {
 
-        LineOfLocations discreteLine = DirectedFilesLine.createLine( DIRECTED, inputLine );
+        LineOfLocations discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "line of locations must be similar" )
@@ -66,7 +66,7 @@ public class LineOfLocations_GetLocations {
     @DisplayName("getLocations(): for a directed line the order of the locations is important")
     void lacksOrderofLocations( String inputLine, String expected ) {
 
-        LineOfLocations discreteLine = DirectedFilesLine.createLine( DIRECTED, inputLine );
+        LineOfLocations discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "line of locations should not be similar" )
@@ -80,24 +80,10 @@ public class LineOfLocations_GetLocations {
         String inputLine = "  b2 c2    d2 e2   ";
         String expected = "b2 c2 d2 e2";
         
-        LineOfLocations discreteLine = DirectedFilesLine.createLine( DIRECTED, inputLine );
+        LineOfLocations discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "createLine() must process and trim String elements" )
-                  .isEqualTo( expected );
-    }
-    
-    @Test
-    @DisplayName("getLocations(): should return a similar line of locations, but trimmed and normalized also for reversed lines and direction is undirected") 
-    void getLocations_shouldBeEqual_ForReversedInputButNotDirected( ) {
-
-        String inputLine = "  e2 d2    c2 b2   ";
-        String expected = "b2 c2 d2 e2";
-        
-        LineOfLocations discreteLine = UndirectedRowsLine.createLine( inputLine );
-        
-        assertThat( discreteLine.getLocations( ) )
-                  .as( "createLine() must must be sorted for not directed lines" )
                   .isEqualTo( expected );
     }
     
@@ -108,7 +94,7 @@ public class LineOfLocations_GetLocations {
         String inputLine = null;
         String expected = "";
         
-        LineOfLocations discreteLine = DirectedFilesLine.createLine( DIRECTED, inputLine );
+        LineOfLocations discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "createLine() must handle NullPointer" )
@@ -122,7 +108,7 @@ public class LineOfLocations_GetLocations {
         String inputLine = "       ";
         String expected = "";
         
-        LineOfLocations discreteLine = DirectedFilesLine.createLine( DIRECTED, inputLine );
+        LineOfLocations discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.getLocations() )
                   .as( "createLine() must handle untrimmed strings" )

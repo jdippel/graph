@@ -2,7 +2,7 @@
  *  DirectedFilesLine_GetLocations.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020 - 2022 Jörg Dippel
  *
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -35,7 +35,7 @@ import org.junit.jupiter.params.provider.CsvSource;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 
@@ -52,7 +52,7 @@ public class DirectedFilesLine_GetLocations {
     @DisplayName("getLocations(): should return a similar line of locations, but trimmed and normalized")
     void containsLocation( String inputLine, String expected ) {
 
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, inputLine );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "line of locations must be similar" )
@@ -66,7 +66,7 @@ public class DirectedFilesLine_GetLocations {
     @DisplayName("getLocations(): for a directed line the order of the locations is important")
     void lacksOrderofLocations( String inputLine, String expected ) {
 
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, inputLine );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "line of locations should not be similar" )
@@ -80,7 +80,7 @@ public class DirectedFilesLine_GetLocations {
         String inputLine = null;
         String expected = "";
         
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, inputLine );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "createLine() must handle NullPointer" )
@@ -94,7 +94,7 @@ public class DirectedFilesLine_GetLocations {
         String inputLine = "       ";
         String expected = "";
         
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, inputLine );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( inputLine, DIRECTION );
         
         assertThat( discreteLine.getLocations() )
                   .as( "createLine() must handle untrimmed strings" )

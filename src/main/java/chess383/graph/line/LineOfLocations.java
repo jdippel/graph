@@ -2,7 +2,7 @@
  *  LineOfLocations.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 - 2021 Jörg Dippel
+ *  Copyright (C) 2019 - 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 package chess383.graph.line;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 import chess383.graph.adjacency.AdjacencyEnum;
 import chess383.graph.direction.Direction;
@@ -31,7 +31,7 @@ import chess383.graph.direction.Direction;
  * Provides locations on a line.
  *
  * @author    Jörg Dippel
- * @version   February 2021
+ * @version   January 2022
  *
  */
 public abstract class LineOfLocations implements Serializable {
@@ -62,18 +62,11 @@ public abstract class LineOfLocations implements Serializable {
     private void setLocations( String value )        { this.locations = value; }
     public String getLocations( )                    { return( this.locations ); }
 
-    /** ---------  Factory  ----------------------------------- */
-    
-    // will be defined by inherited classes
-
     /** ------------------------------------------------------- */
     
     public abstract boolean matchesAdjacency( AdjacencyEnum adjacency );
-    
-    
-    // only let pass strings with at least two tokens separated by white space
-    // then pass the list of all remaining tokens each separated with a single space
-    protected static String normalize( String value, boolean directed ) {
+
+    protected static String normalizeStandard( String value ) {
 
         if( value == null ) {
             return( "" );
@@ -84,31 +77,29 @@ public abstract class LineOfLocations implements Serializable {
                 return( "" );
             }
             else {
-                String directedString = Arrays.stream( tokens ).collect( Collectors.joining( " " ) );
-                if ( directed == true ) {
-                    return( directedString );
-                }
-
-                String reversedString = Arrays.stream( reverse( tokens ) ).collect( Collectors.joining( " " ) );
-                return minimum( reversedString, directedString );
+                return String.join( " ", tokens );
             }
         }
     }
 
-    private static String[] reverse( String[] tokens ) {
+    protected static String normalizeReversed( String value ) {
 
-        String[] reversedTokens = new String[ tokens.length ];
-        for( int cursor = 0; cursor < tokens.length; cursor++ ) {
-            reversedTokens[ tokens.length - 1 - cursor ] = tokens[ cursor ];
+        if( value == null ) {
+            return( "" );
         }
-
-        return reversedTokens;
-    }
-    
-    private static String minimum( String left, String right ) {
-    	
-    	if( left.compareTo( right ) == 0 ) return left;
-    	return ( left.compareTo( right ) < 0 ) ? left : right;
+        else {
+            String[] tokens = value.trim( ).split( "\\s+" );
+            if( tokens.length <= 1 ) {
+                return( "" );
+            }
+            else {
+                String[] reversedTokens = new String[ tokens.length ];
+                for( int cursor = 0; cursor < tokens.length; cursor++ ) {
+                    reversedTokens[ tokens.length - 1 - cursor ] = tokens[ cursor ];
+                }
+                return String.join( " ", reversedTokens );
+            }
+        }
     }
 
     /** ------------------------------------------------------- */
@@ -131,6 +122,31 @@ public abstract class LineOfLocations implements Serializable {
             }
             return( false );
         }
+    }
+
+    public String[] split() {
+
+        return getLocations().split( "\\s+", 0 );
+    }
+
+    public List<String> extract( String location ) {
+
+        List<String> result = new ArrayList<>();
+
+        String[] tokens = split();
+        int cursor = 0;
+        while( cursor < tokens.length ) {
+
+            if( location.compareTo( tokens[ cursor ] ) == 0 ) break;
+            cursor++;
+        }
+
+        while( cursor < tokens.length ) {
+            result.add( tokens[ cursor ] );
+            cursor++;
+        }
+
+        return( result );
     }
 
     /** ---------  Inheritance from Object  ------------------- */

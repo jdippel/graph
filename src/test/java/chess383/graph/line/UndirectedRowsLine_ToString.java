@@ -33,7 +33,7 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 @DisplayName("the public method String toString( ) for class UndirectedRowsLine is tested")
@@ -41,7 +41,7 @@ public class UndirectedRowsLine_ToString {
 
     final Direction DIRECTION = Direction.createBidirectionalDirection();
     final String LOCATIONS = "  e2 d2    c2 b2   ";
-    final String EXPECTED_STRING_DESCRIPTION = "UndirectedRowsLine : " + DIRECTION.toString() + " : " + "b2 c2 d2 e2";
+    final String EXPECTED_STRING_DESCRIPTION = "UndirectedRowsLine : " + DIRECTION.toString() + " : " + "e2 d2 c2 b2";
     
     @Test
     @DisplayName("toString(): should be equal for given definition of UndirectedRowsLine example")

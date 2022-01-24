@@ -2,7 +2,7 @@
  *  TripleBoardByRectangles_GetStaticBundle.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2021 Jörg Dippel
+ *  Copyright (C) 2021, 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2021
+ * @version   January 2022
  *
  */
 @DisplayName("the public method List<LineOfLocations> getStaticBundle() for class TripleBoardByRectangles is tested")
@@ -41,7 +41,7 @@ public class TripleBoardByRectangles_GetStaticBundle {
     @DisplayName("board contains lines")
     public void getStaticBundle_SizeIsGreaterThanZero( ) {
 
-    	assertThat( TripleBoardByRectangles.getStaticBundle().size() ).as( "board contains lines" ).isEqualTo( 388 );
+    	assertThat( TripleBoardByRectangles.getStaticBundle().size() ).as( "board contains lines" ).isEqualTo( 776 );
     }
 }
 

@@ -2,7 +2,7 @@
  *  ICoordinate_GetLineBundles_DyadicCall_DirectedBlackToWhite_StandardBoard.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2019 Jörg Dippel
+ *  Copyright (C) 2019 - 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   January 2022
  *
  */
 @DisplayName("the public method Set<List<String>> getLineBundles() for class ICoordinate_GetLineBundles_DyadicCall_DirectedBlackToWhite_StandardBoard is tested")
@@ -52,12 +52,12 @@ public class ICoordinate_GetLineBundles_DyadicCall_DirectedBlackToWhite_Standard
 
     final static ICoordinate   BOARD =     ICoordinateFactory.STANDARD.get( );
     final static Direction     DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.BLACK	, ColorEnum.WHITE );
-    final static List<String>  EMPTY_LIST = new ArrayList<String>();
+    final static List<String>  EMPTY_LIST = new ArrayList<>();
     
     @ParameterizedTest( name = "given a standard board from location {0} there will be lines {1} to walk along" )
     @MethodSource("stringAndListProvider")
     public void testWithMultiArgMethodSource( String origin, List<String> expectedResultList ) {
-    	assertThat( compareLists( BOARD.getLineBundles( origin, DIRECTION ), expectedResultList ) ).as( describeOnError( origin ) ).isTrue();
+    	assertThat( compareCollections( BOARD.getLineBundles( origin, DIRECTION ), expectedResultList ) ).as( describeOnError( origin ) ).isTrue();
     }
 
     public static Stream<Arguments> stringAndListProvider() {

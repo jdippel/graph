@@ -32,7 +32,7 @@ import org.junit.jupiter.params.provider.CsvSource;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 
@@ -44,8 +44,7 @@ public class UndirectedRowsLine_GetLocations {
     @ParameterizedTest
     @CsvSource({
         "b2 c2 d2 e2, b2 c2 d2 e2",
-         "  b2 c2    d2 e2   , b2 c2 d2 e2",
-         "  e2 d2    c2 b2   , b2 c2 d2 e2"
+         "  b2 c2    d2 e2   , b2 c2 d2 e2"
     })
     @DisplayName("getLocations(): should return a similar line of locations, but trimmed and normalized")
     void containsLocation( String inputLine, String expected ) {
@@ -56,21 +55,7 @@ public class UndirectedRowsLine_GetLocations {
                   .as( "line of locations must be similar" )
                   .isEqualTo( expected );
     }
-    
-    @ParameterizedTest
-    @CsvSource({
-        "  e2 d2    c2 b2   , b2 c3 d2 e2"
-    })
-    @DisplayName("getLocations(): for a directed line the order of the locations is important")
-    void lacksOrderofLocations( String inputLine, String expected ) {
 
-        UndirectedRowsLine discreteLine = UndirectedRowsLine.createLine( inputLine );
-        
-        assertThat( discreteLine.getLocations( ) )
-                  .as( "line of locations should not be similar" )
-                  .isNotEqualTo( expected );
-    }
-    
     @Test
     @DisplayName("getLocations(): should return a similar line of locations, but trimmed and normalized") 
     void getLocations_shouldBeEqual_WhenInputOnlyDiffersInTrimming( ) {
@@ -82,20 +67,6 @@ public class UndirectedRowsLine_GetLocations {
         
         assertThat( discreteLine.getLocations( ) )
                   .as( "createLine() must process and trim String elements" )
-                  .isEqualTo( expected );
-    }
-    
-    @Test
-    @DisplayName("getLocations(): should return a similar line of locations, but trimmed and normalized also for reversed lines and direction is undirected") 
-    void getLocations_shouldBeEqual_ForReversedInputButNotDirected( ) {
-
-        String inputLine = "  e2 d2    c2 b2   ";
-        String expected = "b2 c2 d2 e2";
-        
-        UndirectedRowsLine discreteLine = UndirectedRowsLine.createLine( inputLine );
-        
-        assertThat( discreteLine.getLocations( ) )
-                  .as( "createLine() must must be sorted for not directed lines" )
                   .isEqualTo( expected );
     }
     

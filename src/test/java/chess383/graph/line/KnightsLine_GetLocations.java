@@ -2,7 +2,7 @@
  *  KnightsLine_GetLocations.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020 - 2022 Jörg Dippel
  *
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -32,7 +32,7 @@ import org.junit.jupiter.params.provider.CsvSource;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 
@@ -42,8 +42,7 @@ public class KnightsLine_GetLocations {
 	final String LOCATIONS = "  c3 d1 e3 f1    ";    
     @ParameterizedTest
     @CsvSource({
-        " c3 d1  e3 f1  , c3 d1 e3 f1",
-         "  f1 e3 d1  c3   , c3 d1 e3 f1"
+        " c3 d1  e3 f1  , c3 d1 e3 f1"
     })
     @DisplayName("getLocations(): should return a similar line of locations, but trimmed and normalized")
     void containsLocation( String inputLine, String expected ) {

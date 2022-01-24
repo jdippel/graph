@@ -2,7 +2,7 @@
  *  UndirectedRowsLine.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020 - 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ import chess383.graph.direction.Direction;
  * Provides locations on a line.
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 public class UndirectedRowsLine extends LineOfLocations {
@@ -43,7 +43,7 @@ public class UndirectedRowsLine extends LineOfLocations {
 
     /** ---------  Constructors  ------------------------------ */
 
-    private UndirectedRowsLine( AdjacencyEnum adjacency, Direction direction, String locations ) {
+    private UndirectedRowsLine( String locations ) {
 
     	super( AdjacencyEnum.BY_EDGE, UNDIRECTED_DIRECTION, locations ); 
     }
@@ -58,8 +58,17 @@ public class UndirectedRowsLine extends LineOfLocations {
 
         UndirectedRowsLine result;
 
-        result = new UndirectedRowsLine( AdjacencyEnum.BY_EDGE, UNDIRECTED_DIRECTION, normalize( locations, UNDIRECTED_DIRECTION.isDirected() ) );
+        result = new UndirectedRowsLine( normalizeStandard( locations ) );
         
+        return result;
+    }
+
+    public static UndirectedRowsLine createReversedLine( String locations ) {
+
+        UndirectedRowsLine result;
+
+        result = new UndirectedRowsLine( normalizeReversed( locations ) );
+
         return result;
     }
 

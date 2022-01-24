@@ -2,7 +2,7 @@
  *  KnightsLine.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020 - 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ import chess383.graph.direction.Direction;
  * Provides locations on a line.
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 public class KnightsLine extends LineOfLocations {
@@ -58,8 +58,17 @@ public class KnightsLine extends LineOfLocations {
 
         KnightsLine result;
 
-        result = new KnightsLine( normalize( locations, UNDIRECTED_DIRECTION.isDirected() ) );
+        result = new KnightsLine( normalizeStandard( locations ) );
         
+        return result;
+    }
+
+    public static KnightsLine createReversedLine( String locations ) {
+
+        KnightsLine result;
+
+        result = new KnightsLine( normalizeReversed( locations ) );
+
         return result;
     }
 

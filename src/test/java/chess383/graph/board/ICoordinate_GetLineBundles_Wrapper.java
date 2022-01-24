@@ -2,7 +2,7 @@
  *  ICoordinate_GetLineBundles_Wrapper.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2017 - 2019 Jörg Dippel
+ *  Copyright (C) 2017 - 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,18 +28,20 @@ import chess383.ICoordinate;
 import chess383.graph.adjacency.AdjacencyEnum;
 import chess383.graph.direction.Direction;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * <p>
  * The class ICoordinate_GetLineBundles_Wrapper provides a verifying method.
  * </p>
  *
  * @author    Jörg Dippel
- * @version   December 2019
+ * @version   January 2022
  *
  */
 public class ICoordinate_GetLineBundles_Wrapper { 
     
-    private static final ArrayList<String> ARRAY_LIST = new ArrayList<String>();
+    private static final ArrayList<String> ARRAY_LIST = new ArrayList<>();
     protected final static List<String>  EMPTY_STRING_LIST = ARRAY_LIST;
     
     protected String describeOnError( String origin ) {
@@ -48,10 +50,11 @@ public class ICoordinate_GetLineBundles_Wrapper {
     
     protected boolean testOfArguments( ICoordinate board, String origin, Direction direction, AdjacencyEnum adjacency, List<String> expectedResultList) {
       
-        return compareLists( board.getLineBundles( origin, direction, adjacency ), expectedResultList );
+        return compareCollections( board.getLineBundles( origin, direction, adjacency ), expectedResultList );
     }
     
-    protected boolean compareLists( Set<List<String>> receivedSet, List<String> expectedList) {
+    // protected boolean compareLists( Set<List<String>> receivedSet, List<String> expectedList ) {
+    protected boolean compareCollections( Set<List<String>> receivedSet, List<String> expectedList ) {
         
         if( receivedSet.isEmpty() && ( expectedList.isEmpty() ) ) {
             return( true );
@@ -59,19 +62,33 @@ public class ICoordinate_GetLineBundles_Wrapper {
         if( receivedSet.size() != expectedList.size() ) {
             return( false );
         }
-        
-        boolean result = true;
-        for( String expectedString : expectedList ) {
-            result = false;
-            for ( String receivedString : LineBundleMigration.flatten( receivedSet ) ) {
-                if ( receivedString.startsWith( expectedString ) ) {
-                    result = true;
+
+        boolean comparison = false;
+        for ( List<String> strings : receivedSet ) {
+            String line = String.join( " ", strings.toArray( new String[0] ) );
+            // System.out.println( line );
+            comparison = false;
+            for ( String expected : expectedList ) {
+                if ( line.contains( expected ) ) {
+                    comparison = true;
                     break;
                 }
             }
-            if ( result == false ) break;
+            if ( comparison == false ) break;
         }
-        return result;
+
+        // System.out.println();
+        return comparison;
+    }
+
+    private String reverseLocations( String locations ) {
+
+        String[] tokens = locations.trim( ).split( "\\s+" );
+        String[] reversedTokens = new String[ tokens.length ];
+        for( int cursor = 0; cursor < tokens.length; cursor++ ) {
+            reversedTokens[ tokens.length - 1 - cursor ] = tokens[ cursor ];
+        }
+        return String.join( " ", reversedTokens );
     }
 }
 

@@ -2,7 +2,7 @@
  *  DirectedDiagonalLine_Contains.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020 - 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ import chess383.graph.direction.Direction;
  * </p>
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   January 2022
  *
  */
 @DisplayName("the public method boolean contains( ) for class DirectedDiagonalLine is tested")
@@ -48,7 +48,7 @@ public class DirectedDiagonalLine_Contains {
     public void contains_shouldBeTrue_WhenLocationIsContainedInTheMiddleOfTheLine( ) {
 
         final String location = "c3";
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "defined line %s with location %s should contain location if asked", GIVEN_LINE, location ) )
@@ -60,7 +60,7 @@ public class DirectedDiagonalLine_Contains {
     public void contains_shouldBeTrue_WhenLocationIsContainedInTheBeginningOfTheLine( ) {
 
         final String location = "b2";
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "defined line %s with location %s should contain location if asked", GIVEN_LINE, location ) )
@@ -72,7 +72,7 @@ public class DirectedDiagonalLine_Contains {
     public void contains_shouldBeTrue_WhenLocationIsContainedAtTheEndOfTheLine( ) {
 
         final String location = "e5";
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "defined line %s with location %s should contain location if asked", GIVEN_LINE, location ) )
@@ -84,7 +84,7 @@ public class DirectedDiagonalLine_Contains {
     public void contains_shouldBeFalse_WhenLocationIsNotDefinedByAName( ) {
 
         final String location = "c3 d4";   // a name does not contain white spaces
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "defined line %s with passed locations %s should return false for several locations", GIVEN_LINE, location ) )
@@ -96,7 +96,7 @@ public class DirectedDiagonalLine_Contains {
     public void contains_shouldBeFalse_WhenLocationIsMisspelled( ) {
 
         final String location = "3c";   // a name should have a format - first literal then number
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "defined line %s with passed location %s should return true only if it matches exactly", GIVEN_LINE, location ) )
@@ -108,7 +108,7 @@ public class DirectedDiagonalLine_Contains {
     public void contains_shouldBeFalse_WhenCreatedLineIsEmptyOrNull( ) {
 
         final String location = "c2";
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "an empty line %s with passed location %s should return always false", GIVEN_LINE, location ) )
@@ -120,7 +120,7 @@ public class DirectedDiagonalLine_Contains {
     public void contains_shouldBeFalse_WhenCreatedLocationIsEmpty( ) {
 
         final String location = "";   // an empty name
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "an empty line %s with passed location %s should return always false", GIVEN_LINE, location ) )
@@ -132,7 +132,7 @@ public class DirectedDiagonalLine_Contains {
     public void contains_shouldBeFalse_WhenCreatedLocationIsNull( ) {
 
         final String location = null;   // a nullable name
-        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedDiagonalLine discreteLine = DirectedDiagonalLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "an empty line %s with passed location %s should return always false", GIVEN_LINE, location ) )

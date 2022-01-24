@@ -1,8 +1,8 @@
 /*
- *  UndirectedRowsLine_CreateLine.java
+ *  UndirectedRowsLine_CreateReversedLine.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 - 2022 Jörg Dippel
+ *  Copyright (C) 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,52 +20,52 @@
 
 package chess383.graph.line;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * <p>
- * The class UndirectedRowsLine_CreateLine implements an upper tester.
+ * The class UndirectedRowsLine_CreateReversedLine implements an upper tester.
  * </p>
  *
  * @author    Jörg Dippel
  * @version   January 2022
  */
-@DisplayName("the public static method UndirectedRowsLine createLine() for class UndirectedRowsLine is tested")
-public class UndirectedRowsLine_CreateLine { 
+@DisplayName("the public static method UndirectedRowsLine createReversedLine() for class UndirectedRowsLine is tested")
+public class UndirectedRowsLine_CreateReversedLine {
  
     @Test
-    @DisplayName("createLine(): should return UndirectedRowsLine when locations are defined as a rank")
-    public void createLine_shouldReturnUndirectedRowsLine_WhenLocationsAreDefinedAsARank( ) {
+    @DisplayName("createReversedLine(): should return UndirectedRowsLine when locations are defined as a rank")
+    public void createReversedLine_shouldReturnUndirectedRowsLine_WhenLocationsAreDefinedAsARank( ) {
         
         String passedString = "b2 c2 d2 e2";
 
-        assertThat( UndirectedRowsLine.createLine( passedString ) )
+        assertThat( UndirectedRowsLine.createReversedLine( passedString ) )
                   .as( "should return instance of UndirectedRowsLine" )
                   .isInstanceOf( UndirectedRowsLine.class );
     }
    
     @Test
-    @DisplayName("createLine(): should return UndirectedRowsLine with normalized string when locations are defined")
-    public void createLine_shouldReturnLocationsFromUndirectedRowsLineWithNormalizedString_WhenLocationsAreDefined( ) {
+    @DisplayName("createReversedLine(): should return UndirectedRowsLine with normalized string when locations are defined")
+    public void createReversedLine_shouldReturnLocationsFromUndirectedRowsLineWithNormalizedString_WhenLocationsAreDefined( ) {
         
         String passedString = "b2 c2  d2 e2 ";
-        String expectedString = "b2 c2 d2 e2";
+        String expectedString = "e2 d2 c2 b2";
 
-        assertThat( UndirectedRowsLine.createLine( passedString ).getLocations() )
+        assertThat( UndirectedRowsLine.createReversedLine( passedString ).getLocations() )
                   .as( "should return normalized string" )
                   .isEqualTo( expectedString );
     }
     
     @Test
-    @DisplayName("createLine(): should return empty line From UndirectedRowsLine ignoring string when less than two names are offered")
-    public void createLine_shouldReturnEmptyLineFromUndirectedRowsLineIgnoringString_WhenLessThanTwoNamesAreOffered( ) {
+    @DisplayName("createReversedLine(): should return empty line From UndirectedRowsLine ignoring string when less than two names are offered")
+    public void createReversedLine_shouldReturnEmptyLineFromUndirectedRowsLineIgnoringString_WhenLessThanTwoNamesAreOffered( ) {
 
         String passedString = "e4 ";
 
-        assertThat( UndirectedRowsLine.createLine( passedString ).getLocations() )
+        assertThat( UndirectedRowsLine.createReversedLine( passedString ).getLocations() )
                   .as( "should return instance of UndirectedRowsLine" )
                   .isEqualTo( "" );
     }

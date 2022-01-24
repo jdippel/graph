@@ -48,7 +48,7 @@ public class DirectedFilesLine_Contains {
     public void contains_shouldBeTrue_WhenLocationIsContainedInTheMiddleOfTheLine( ) {
 
         final String location = "b3";
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "defined line %s with location %s should contain location if asked", GIVEN_LINE, location ) )
@@ -60,7 +60,7 @@ public class DirectedFilesLine_Contains {
     public void contains_shouldBeTrue_WhenLocationIsContainedInTheBeginningOfTheLine( ) {
 
         final String location = "b2";
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "defined line %s with location %s should contain location if asked", GIVEN_LINE, location ) )
@@ -72,7 +72,7 @@ public class DirectedFilesLine_Contains {
     public void contains_shouldBeTrue_WhenLocationIsContainedAtTheEndOfTheLine( ) {
 
         final String location = "b5";
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "defined line %s with location %s should contain location if asked", GIVEN_LINE, location ) )
@@ -84,7 +84,7 @@ public class DirectedFilesLine_Contains {
     public void contains_shouldBeFalse_WhenLocationIsNotDefinedByAName( ) {
 
         final String location = "b3 b4";   // a name does not contain white spaces
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "defined line %s with passed locations %s should return false for several locations", GIVEN_LINE, location ) )
@@ -96,7 +96,7 @@ public class DirectedFilesLine_Contains {
     public void contains_shouldBeFalse_WhenLocationIsMisspelled( ) {
 
         final String location = "3b";   // a name should have a format - first literal then number
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "defined line %s with passed location %s should return true only if it matches exactly", GIVEN_LINE, location ) )
@@ -108,7 +108,7 @@ public class DirectedFilesLine_Contains {
     public void contains_shouldBeFalse_WhenCreatedLineIsEmptyOrNull( ) {
 
         final String location = "b3";
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, null );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( null, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "an empty line %s with passed location %s should return always false", GIVEN_LINE, location ) )
@@ -120,7 +120,7 @@ public class DirectedFilesLine_Contains {
     public void contains_shouldBeFalse_WhenCreatedLocationIsEmpty( ) {
 
         final String location = "";   // an empty name
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "an empty line %s with passed location %s should return always false", GIVEN_LINE, location ) )
@@ -132,7 +132,7 @@ public class DirectedFilesLine_Contains {
     public void contains_shouldBeFalse_WhenCreatedLocationIsNull( ) {
 
         final String location = null;   // a nullable name
-        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( DIRECTION, GIVEN_LINE );
+        DirectedFilesLine discreteLine = DirectedFilesLine.createLine( GIVEN_LINE, DIRECTION );
 
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "an empty line %s with passed location %s should return always false", GIVEN_LINE, location ) )

@@ -1,8 +1,8 @@
 /*
- *  DirectedDigonalLine.java
+ *  DirectedDiagonalLine.java
  *
  *  chess383 is a collection of chess related utilities.
- *  Copyright (C) 2020 Jörg Dippel
+ *  Copyright (C) 2020 - 2022 Jörg Dippel
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
 
 package chess383.graph.line;
 
+import chess383.ColorEnum;
 import chess383.graph.adjacency.AdjacencyEnum;
 import chess383.graph.direction.Direction;
 
@@ -35,15 +36,23 @@ public class DirectedDiagonalLine extends LineOfLocations {
 	// for interface Serializable
 	private static final long serialVersionUID = 325182219372119496L;
 
+    private static final Direction STANDARD_DIRECTION = Direction.createUnidirectionalDirection( ColorEnum.WHITE, ColorEnum.BLACK );
+    private static final Direction REVERSED_DIRECTION = Direction.createReversedDirection( STANDARD_DIRECTION );
+
 	/** ---------  Attributes  -------------------------------- */
 
 	// inherited
 
 	/** ---------  Constructors  ------------------------------ */
 
+    private DirectedDiagonalLine( String locations ) {
+
+    	super( AdjacencyEnum.BY_POINT, STANDARD_DIRECTION, locations );
+    }
+
     private DirectedDiagonalLine( Direction direction, String locations ) {
 
-    	super( AdjacencyEnum.BY_POINT, direction, locations );
+        super( AdjacencyEnum.BY_POINT, direction, locations );
     }
 
     /** ---------  Getter and Setter  ------------------------- */
@@ -52,12 +61,39 @@ public class DirectedDiagonalLine extends LineOfLocations {
 
     /** ---------  Factory  ----------------------------------- */
     
-    public static DirectedDiagonalLine createLine( Direction direction, String locations ) {
+    public static DirectedDiagonalLine createLine( String locations, Direction direction ) {
 
         DirectedDiagonalLine result;
 
-        result = new DirectedDiagonalLine( direction, normalize( locations, direction.isDirected() ) );
+        result = new DirectedDiagonalLine( direction, normalizeStandard( locations ) );
         
+        return result;
+    }
+
+    public static DirectedDiagonalLine createLine( String locations ) {
+
+        DirectedDiagonalLine result;
+
+        result = new DirectedDiagonalLine( normalizeStandard( locations ) );
+
+        return result;
+    }
+
+    public static DirectedDiagonalLine createReversedLine( String locations, Direction direction ) {
+
+        DirectedDiagonalLine result;
+
+        result = new DirectedDiagonalLine( Direction.createReversedDirection( direction ), normalizeReversed( locations ) );
+
+        return result;
+    }
+
+    public static DirectedDiagonalLine createReversedLine( String locations ) {
+
+        DirectedDiagonalLine result;
+
+        result = new DirectedDiagonalLine( REVERSED_DIRECTION, normalizeReversed( locations ) );
+
         return result;
     }
 
