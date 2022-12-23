@@ -88,6 +88,31 @@ public class LineOfLocations_Contains {
                   .as( String.format( "defined line %s with passed locations %s should return false for several locations", GIVEN_LINE, location ) )
                   .isFalse();
     }
+
+    @Test
+    @DisplayName("contains(): return value should be false when location is a string but not a specified name")
+    public void contains_shouldBeFalse_WhenLocationIsNotDefinedByANameStartingWithAWhiteSpace( ) {
+
+        final String location = " c2 d2";   // a name does not contain white spaces
+        LineOfLocations discreteLine = UndirectedRowsLine.createLine( GIVEN_LINE );
+
+        assertThat( discreteLine.contains( location ))
+                .as( String.format( "defined line %s with passed locations %s should return false for several locations", GIVEN_LINE, location ) )
+                .isFalse();
+    }
+
+    @Test
+    @DisplayName("contains(): return value should be false when location is at least named twice")
+    public void contains_shouldBeFalse_WhenLocationIsNamedTwice( ) {
+
+        final String location = "c2";
+        String line = GIVEN_LINE + " " + GIVEN_LINE;
+        LineOfLocations discreteLine = UndirectedRowsLine.createLine( line );
+
+        assertThat( discreteLine.contains( location ))
+                .as( String.format( "defined line %s with passed locations %s should return false for locations named twice", line, location ) )
+                .isFalse();
+    }
     
     @Test
     @DisplayName("contains(): return value should be false when location is misspelled")
@@ -121,8 +146,20 @@ public class LineOfLocations_Contains {
         LineOfLocations discreteLine = UndirectedRowsLine.createLine( GIVEN_LINE );
 
         assertThat( discreteLine.contains( location ))
-                  .as( String.format( "an empty line %s with passed location %s should return always false", GIVEN_LINE, location ) )
+                  .as( String.format( "a line %s with passed empty location %s should return always false", GIVEN_LINE, location ) )
                   .isFalse();
+    }
+
+    @Test
+    @DisplayName("contains(): return value should be false when location is white space")
+    public void contains_shouldBeFalse_WhenCreatedLocationIsWhiteSpace( ) {
+
+        final String location = " ";   // a white space name
+        LineOfLocations discreteLine = UndirectedRowsLine.createLine( GIVEN_LINE );
+
+        assertThat( discreteLine.contains( location ))
+                .as( String.format( "a line %s with passed white space location %s should return always false", GIVEN_LINE, location ) )
+                .isFalse();
     }
     
     @Test
@@ -135,6 +172,19 @@ public class LineOfLocations_Contains {
         assertThat( discreteLine.contains( location ))
                   .as( String.format( "an empty line %s with passed location %s should return always false", GIVEN_LINE, location ) )
                   .isFalse();
+    }
+
+    @Test
+    @DisplayName("contains(): return value should be false when location is at least named twice mutation test")
+    public void contains_shouldBeFalse_WhenLocationIsNamedTwiceUsingMutationTest( ) {
+
+        final String location = "c";
+        String line = "a2 cc e4";
+        LineOfLocations discreteLine = UndirectedRowsLine.createLine( line );
+
+        assertThat( discreteLine.contains( location ))
+                .as( String.format( "defined line %s with passed locations %s should return false for locations named twice", line, location ) )
+                .isFalse();
     }
 }
 

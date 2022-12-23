@@ -29,7 +29,7 @@ import chess383.ColorEnum;
  * Defines directions based on colors.
  *
  * @author    Jörg Dippel
- * @version   January 2019
+ * @version   November 2022
  *
  */
 public class Direction implements Serializable {
@@ -92,20 +92,12 @@ public class Direction implements Serializable {
     @Override
     public boolean equals( Object value ) {
 
-        boolean result;
-
-        result = ( value instanceof Direction ) && isMeaningfullyEquivalent( ( Direction ) value );
-
-        return( result );
+        return ( value instanceof Direction ) && isMeaningfullyEquivalent( ( Direction ) value );
     }
 
     private boolean isMeaningfullyEquivalent( Direction value ) {
 
-        boolean result;
-        
-        result = ( getStart( ) == value.getStart( ) ) && ( getEnd( ) == value.getEnd( ) );
-
-        return( result );
+        return ( getStart( ) == value.getStart( ) ) && ( getEnd( ) == value.getEnd( ) );
     }
 
     @Override public int hashCode( ) { return( toString( ).hashCode( ) ); }

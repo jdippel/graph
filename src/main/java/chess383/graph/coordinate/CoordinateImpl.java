@@ -26,7 +26,7 @@ import java.io.Serializable;
  * Provides a location.
  *
  * @author    Jörg Dippel
- * @version   December 2018
+ * @version   November 2022
  *
  */
 public class CoordinateImpl implements Coordinate, Serializable {
@@ -61,30 +61,18 @@ public class CoordinateImpl implements Coordinate, Serializable {
     @Override
     public boolean equals( Object value ) {
 
-        boolean result;
-
-        result = ( value instanceof CoordinateImpl ) &&  isMeaningfullyEquivalent( ( CoordinateImpl ) value );
-
-        return( result );
+        return ( value instanceof CoordinateImpl ) &&  isMeaningfullyEquivalent( ( CoordinateImpl ) value );
     }
 
     private boolean isMeaningfullyEquivalent( CoordinateImpl value ) {
 
-        boolean result = true;
-
-        result = getName( ).equalsIgnoreCase( value.getName( ) );
-
-        return( result );
+        return getName( ).equalsIgnoreCase( value.getName( ) );
     }
 
     @Override
     public int hashCode( ) {
 
-        int result;
-
-        result = getName( ).hashCode( );
-
-        return( result );
+        return getName( ).hashCode( );
     }
 }
 

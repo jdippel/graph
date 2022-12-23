@@ -28,7 +28,7 @@ import chess383.graph.direction.Direction;
  * Provides locations on a line.
  *
  * @author    Jörg Dippel
- * @version   January 2022
+ * @version   November 2022
  *
  */
 public class DirectedFilesLine extends LineOfLocations {
@@ -63,38 +63,22 @@ public class DirectedFilesLine extends LineOfLocations {
     
     public static DirectedFilesLine createLine( String locations, Direction direction ) {
 
-        DirectedFilesLine result;
-
-        result = new DirectedFilesLine( normalizeStandard( locations ), direction );
-        
-        return result;
+        return new DirectedFilesLine( normalizeStandard( locations ), direction );
     }
 
     public static DirectedFilesLine createLine( String locations ) {
 
-        DirectedFilesLine result;
-
-        result = new DirectedFilesLine( normalizeStandard( locations ) );
-
-        return result;
+        return new DirectedFilesLine( normalizeStandard( locations ) );
     }
 
     public static DirectedFilesLine createReversedLine( String locations, Direction direction ) {
 
-        DirectedFilesLine result;
-
-        result = new DirectedFilesLine( normalizeReversed( locations ), Direction.createReversedDirection( direction ) );
-
-        return result;
+        return new DirectedFilesLine( normalizeReversed( locations ), Direction.createReversedDirection( direction ) );
     }
 
     public static DirectedFilesLine createReversedLine( String locations ) {
 
-        DirectedFilesLine result;
-
-        result = new DirectedFilesLine( normalizeReversed( locations ), REVERSED_DIRECTION );
-
-        return result;
+        return new DirectedFilesLine( normalizeReversed( locations ), REVERSED_DIRECTION );
     }
 
     /** ------------------------------------------------------- */
@@ -114,21 +98,13 @@ public class DirectedFilesLine extends LineOfLocations {
     @Override
     public boolean equals( Object value ) {
 
-        boolean result;
-
-        result = ( value instanceof DirectedFilesLine ) && 
-        		 isMeaningfullyEquivalent( ( DirectedFilesLine ) value );
-        
-        return( result );
+        return ( value instanceof DirectedFilesLine )
+                && isMeaningfullyEquivalent( ( DirectedFilesLine ) value );
     }
 
     private boolean isMeaningfullyEquivalent( DirectedFilesLine value ) {
 
-        boolean result;
-        
-        result = getLocations().equals( value.getLocations() );
-
-        return( result );
+        return getLocations().equals( value.getLocations() );
     }
 
     @Override public int hashCode( ) { return( toString( ).hashCode( ) ); }

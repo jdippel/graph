@@ -5,7 +5,7 @@ This README documents a chess library for chess board infrastructure.
 ### What is this repository for? ###
 
 * a library for chess board infrastructure
-* Version 6.0.2
+* Version 7.1.0
 
 ### How do I get set up? ###
 
@@ -34,6 +34,8 @@ If a piece is located on a square, this means, the peace can move along a line o
 If a piece can move into different directions there is a bundle of lines to move along.
 
 graph is a layer of chess383 to provide the bundle of lines to move along.
+graph is a library for a generalized chess board. 
 
-# graph is a library for a generalized chess board. #
+With version 7.0.0 a parent pom is introduced that is part of chessparent repository.
+The parent pom.xml is placed relatively one directory above the repository pom.xml.
 

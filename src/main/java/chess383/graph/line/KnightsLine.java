@@ -27,7 +27,7 @@ import chess383.graph.direction.Direction;
  * Provides locations on a line.
  *
  * @author    Jörg Dippel
- * @version   January 2022
+ * @version   November 2022
  *
  */
 public class KnightsLine extends LineOfLocations {
@@ -56,20 +56,12 @@ public class KnightsLine extends LineOfLocations {
     
     public static KnightsLine createLine( String locations ) {
 
-        KnightsLine result;
-
-        result = new KnightsLine( normalizeStandard( locations ) );
-        
-        return result;
+        return new KnightsLine( normalizeStandard( locations ) );
     }
 
     public static KnightsLine createReversedLine( String locations ) {
 
-        KnightsLine result;
-
-        result = new KnightsLine( normalizeReversed( locations ) );
-
-        return result;
+        return new KnightsLine( normalizeReversed( locations ) );
     }
 
     /** ------------------------------------------------------- */
@@ -89,21 +81,13 @@ public class KnightsLine extends LineOfLocations {
     @Override
     public boolean equals( Object value ) {
 
-        boolean result;
-
-        result = ( value instanceof KnightsLine ) && 
-        		 isMeaningfullyEquivalent( ( KnightsLine ) value );
-        
-        return( result );
+        return ( value instanceof KnightsLine )
+                && isMeaningfullyEquivalent( ( KnightsLine ) value );
     }
 
     private boolean isMeaningfullyEquivalent( KnightsLine value ) {
 
-        boolean result;
-        
-        result = getLocations().equals( value.getLocations() );
-
-        return( result );
+        return getLocations().equals( value.getLocations() );
     }
 
     @Override public int hashCode( ) { return( toString( ).hashCode( ) ); }

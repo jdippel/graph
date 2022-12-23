@@ -27,7 +27,7 @@ import chess383.graph.direction.Direction;
  * Provides locations on a line.
  *
  * @author    Jörg Dippel
- * @version   January 2022
+ * @version   November 2022
  *
  */
 public class UndirectedRowsLine extends LineOfLocations {
@@ -56,20 +56,12 @@ public class UndirectedRowsLine extends LineOfLocations {
     
     public static UndirectedRowsLine createLine( String locations ) {
 
-        UndirectedRowsLine result;
-
-        result = new UndirectedRowsLine( normalizeStandard( locations ) );
-        
-        return result;
+        return new UndirectedRowsLine( normalizeStandard( locations ) );
     }
 
     public static UndirectedRowsLine createReversedLine( String locations ) {
 
-        UndirectedRowsLine result;
-
-        result = new UndirectedRowsLine( normalizeReversed( locations ) );
-
-        return result;
+        return new UndirectedRowsLine( normalizeReversed( locations ) );
     }
 
     /** ------------------------------------------------------- */
@@ -89,21 +81,13 @@ public class UndirectedRowsLine extends LineOfLocations {
     @Override
     public boolean equals( Object value ) {
 
-        boolean result;
-
-        result = ( value instanceof UndirectedRowsLine ) && 
-        		 isMeaningfullyEquivalent( ( UndirectedRowsLine ) value );
-        
-        return( result );
+        return ( value instanceof UndirectedRowsLine )
+                && isMeaningfullyEquivalent( ( UndirectedRowsLine ) value );
     }
 
     private boolean isMeaningfullyEquivalent( UndirectedRowsLine value ) {
 
-        boolean result;
-        
-        result = getLocations().equals( value.getLocations() );
-
-        return( result );
+        return getLocations().equals( value.getLocations() );
     }
 
     @Override public int hashCode( ) { return( toString( ).hashCode( ) ); }

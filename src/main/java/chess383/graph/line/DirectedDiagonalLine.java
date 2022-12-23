@@ -28,7 +28,7 @@ import chess383.graph.direction.Direction;
  * Provides locations on a line.
  *
  * @author    Jörg Dippel
- * @version   February 2020
+ * @version   November 2022
  *
  */
 public class DirectedDiagonalLine extends LineOfLocations {
@@ -63,38 +63,22 @@ public class DirectedDiagonalLine extends LineOfLocations {
     
     public static DirectedDiagonalLine createLine( String locations, Direction direction ) {
 
-        DirectedDiagonalLine result;
-
-        result = new DirectedDiagonalLine( direction, normalizeStandard( locations ) );
-        
-        return result;
+        return new DirectedDiagonalLine( direction, normalizeStandard( locations ) );
     }
 
     public static DirectedDiagonalLine createLine( String locations ) {
 
-        DirectedDiagonalLine result;
-
-        result = new DirectedDiagonalLine( normalizeStandard( locations ) );
-
-        return result;
+        return new DirectedDiagonalLine( normalizeStandard( locations ) );
     }
 
     public static DirectedDiagonalLine createReversedLine( String locations, Direction direction ) {
 
-        DirectedDiagonalLine result;
-
-        result = new DirectedDiagonalLine( Direction.createReversedDirection( direction ), normalizeReversed( locations ) );
-
-        return result;
+        return new DirectedDiagonalLine( Direction.createReversedDirection( direction ), normalizeReversed( locations ) );
     }
 
     public static DirectedDiagonalLine createReversedLine( String locations ) {
 
-        DirectedDiagonalLine result;
-
-        result = new DirectedDiagonalLine( REVERSED_DIRECTION, normalizeReversed( locations ) );
-
-        return result;
+        return new DirectedDiagonalLine( REVERSED_DIRECTION, normalizeReversed( locations ) );
     }
 
     /** ------------------------------------------------------- */
@@ -114,22 +98,14 @@ public class DirectedDiagonalLine extends LineOfLocations {
     @Override
     public boolean equals( Object value ) {
 
-        boolean result;
-
-        result = ( value instanceof DirectedDiagonalLine ) && 
-        		 isMeaningfullyEquivalent( ( DirectedDiagonalLine ) value );
-        
-        return( result );
+        return ( value instanceof DirectedDiagonalLine )
+                && isMeaningfullyEquivalent( ( DirectedDiagonalLine ) value );
     }
 
     private boolean isMeaningfullyEquivalent( DirectedDiagonalLine value ) {
 
-        boolean result;
-        
-        result = getDirection().equals( value.getDirection() ) 
-              && getLocations().equals( value.getLocations() );
-
-        return( result );
+        return getDirection().equals( value.getDirection() )
+                && getLocations().equals( value.getLocations() );
     }
 
     @Override public int hashCode( ) { return( toString( ).hashCode( ) ); }

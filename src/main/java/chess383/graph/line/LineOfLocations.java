@@ -22,6 +22,7 @@ package chess383.graph.line;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import chess383.graph.adjacency.AdjacencyEnum;
@@ -31,7 +32,7 @@ import chess383.graph.direction.Direction;
  * Provides locations on a line.
  *
  * @author    Jörg Dippel
- * @version   January 2022
+ * @version   November 2022
  *
  */
 public abstract class LineOfLocations implements Serializable {
@@ -66,62 +67,62 @@ public abstract class LineOfLocations implements Serializable {
     
     public abstract boolean matchesAdjacency( AdjacencyEnum adjacency );
 
+    private static String[] convertString( String value ) {
+
+        return value.trim( ).split( "\\s+" );
+    }
+    private static boolean tooSmallString( String value ) {
+
+        return( value == null ) || ( convertString( value ).length <= 1 );
+    }
     protected static String normalizeStandard( String value ) {
 
-        if( value == null ) {
-            return( "" );
-        }
-        else {
-            String[] tokens = value.trim( ).split( "\\s+" );
-            if( tokens.length <= 1 ) {
-                return( "" );
-            }
-            else {
-                return String.join( " ", tokens );
-            }
-        }
+        return tooSmallString( value ) ? "" : String.join( " ", convertString( value ) );
     }
 
+    private static String[] reverseArray( String[] tokens ) {
+
+        String[] reversedTokens = new String[ tokens.length ];
+        for( int cursor = 0; cursor < tokens.length; cursor++ ) {
+            reversedTokens[ tokens.length - 1 - cursor ] = tokens[ cursor ];
+        }
+        return reversedTokens;
+    }
     protected static String normalizeReversed( String value ) {
 
-        if( value == null ) {
-            return( "" );
-        }
-        else {
-            String[] tokens = value.trim( ).split( "\\s+" );
-            if( tokens.length <= 1 ) {
-                return( "" );
-            }
-            else {
-                String[] reversedTokens = new String[ tokens.length ];
-                for( int cursor = 0; cursor < tokens.length; cursor++ ) {
-                    reversedTokens[ tokens.length - 1 - cursor ] = tokens[ cursor ];
-                }
-                return String.join( " ", reversedTokens );
-            }
-        }
+        return tooSmallString( value ) ? "" : String.join( " ", reverseArray( convertString( value ) ) );
     }
 
     /** ------------------------------------------------------- */
 
+    private int containingCursor(String location, String locations ) {
+
+        return locations.indexOf( location );
+    }
+    private boolean containsTwice(String location, String locations, int cursor ) {
+
+        return ( locations.length() > cursor )
+                && ( containingCursor( location, locations.substring( cursor ) ) >= 0 );
+    }
+    private boolean containsNoSpace( String location ) {
+
+        return containingCursor( " ", location ) < 0;
+    }
+    private boolean containsOnce( String location, String locations ) {
+
+        return containingCursor( location, locations ) >= 0;
+    }
+    private boolean containsExactlyOnce( String location, String locations ) {
+
+        return containsOnce( location, locations )
+                && ! containsTwice( location, locations, containingCursor( location, locations ) + 3 );
+    }
     public boolean contains( String location ) {
 
-        if( location == null || location.trim().length() == 0 ) {
-            return( false );
-        }
-        else {
-            String[] tokens = getLocations().trim( ).split( "\\s+" );
-
-            String trimmedLocation = location.trim();
-            int cursor = 0;
-            while( cursor < tokens.length ) {
-                if( tokens[ cursor ].equalsIgnoreCase( trimmedLocation ) ) {
-                    return( true );     // break
-                }
-                cursor++;
-            }
-            return( false );
-        }
+        return ( location != null )
+                && ( location.length() > 1 )
+                && containsNoSpace( location )
+                && containsExactlyOnce( location, getLocations() );
     }
 
     public String[] split() {
@@ -129,24 +130,14 @@ public abstract class LineOfLocations implements Serializable {
         return getLocations().split( "\\s+", 0 );
     }
 
+    private List<String> extract( List<String> locations, String location ) {
+
+        return ( locations.contains( location ) ) ? locations.subList( locations.indexOf( location ), locations.size() ) : List.of() ;
+    }
+
     public List<String> extract( String location ) {
 
-        List<String> result = new ArrayList<>();
-
-        String[] tokens = split();
-        int cursor = 0;
-        while( cursor < tokens.length ) {
-
-            if( location.compareTo( tokens[ cursor ] ) == 0 ) break;
-            cursor++;
-        }
-
-        while( cursor < tokens.length ) {
-            result.add( tokens[ cursor ] );
-            cursor++;
-        }
-
-        return( result );
+        return extract( new ArrayList<>( Arrays.asList( split() ) ), location );
     }
 
     /** ---------  Inheritance from Object  ------------------- */

@@ -26,7 +26,7 @@ import java.io.Serializable;
  * Provides a location.
  *
  * @author    Jörg Dippel
- * @version   January 2019
+ * @version   November 2022
  *
  */
 public class Location implements Serializable {
@@ -73,29 +73,17 @@ public class Location implements Serializable {
     @Override
     public boolean equals( Object value ) {
 
-        boolean result;
-
-        result = ( value instanceof Location ) && isMeaningfullyEquivalent( ( Location )value );
-        
-        return( result );
+        return ( value instanceof Location ) && isMeaningfullyEquivalent( ( Location )value );
     }
 
     private boolean isMeaningfullyEquivalent( Location value ) {
 
-        boolean result = true;
-
-        result = getCoordinate( ).equals( value.getCoordinate( ) );
-
-        return( result );
+        return getCoordinate( ).equals( value.getCoordinate( ) );
     }
 
     @Override
     public int hashCode( ) {
 
-        int result;
-
-        result = getCoordinate( ).hashCode( );
-
-        return( result );
+        return getCoordinate( ).hashCode( );
     }
 }
